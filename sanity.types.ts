@@ -607,6 +607,11 @@ export type Profile = {
     stackoverflow?: string;
   };
   yearsOfExperience?: number;
+  stats?: Array<{
+    label?: string;
+    value?: string;
+    _key: string;
+  }>;
   hourlyRate?: number;
 };
 
@@ -732,8 +737,44 @@ export type AllSanitySchemaTypes = SiteSettings | Contact | Service | Blog | Ach
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./components/sections/AboutSection.tsx
 // Variable: ABOUT_QUERY
-// Query: *[_type == "profile"][0]{  firstName,  lastName,  fullBio,  yearsOfExperience,  email,  phone,  location}
+// Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  fullBio,  yearsOfExperience,  stats,  email,  phone,  location}
 export type ABOUT_QUERYResult = {
+  firstName: null;
+  lastName: null;
+  fullBio: null;
+  yearsOfExperience: null;
+  stats: null;
+  email: null;
+  phone: null;
+  location: null;
+} | {
+  firstName: null;
+  lastName: null;
+  fullBio: null;
+  yearsOfExperience: number | null;
+  stats: null;
+  email: null;
+  phone: null;
+  location: null;
+} | {
+  firstName: null;
+  lastName: null;
+  fullBio: null;
+  yearsOfExperience: null;
+  stats: null;
+  email: null;
+  phone: null;
+  location: string | null;
+} | {
+  firstName: null;
+  lastName: null;
+  fullBio: null;
+  yearsOfExperience: null;
+  stats: null;
+  email: string | null;
+  phone: string | null;
+  location: null;
+} | {
   firstName: string | null;
   lastName: string | null;
   fullBio: Array<{
@@ -755,6 +796,11 @@ export type ABOUT_QUERYResult = {
     _key: string;
   }> | null;
   yearsOfExperience: number | null;
+  stats: Array<{
+    label?: string;
+    value?: string;
+    _key: string;
+  }> | null;
   email: string | null;
   phone: string | null;
   location: string | null;
@@ -788,8 +834,23 @@ export type BLOG_QUERYResult = Array<{
 
 // Source: ./components/sections/ContactSection.tsx
 // Variable: PROFILE_QUERY
-// Query: *[_type == "profile"][0]{  email,  phone,  location,  socialLinks}
+// Query: *[_id == "singleton-profile"][0]{  email,  phone,  location,  socialLinks}
 export type PROFILE_QUERYResult = {
+  email: null;
+  phone: null;
+  location: null;
+  socialLinks: null;
+} | {
+  email: null;
+  phone: null;
+  location: string | null;
+  socialLinks: null;
+} | {
+  email: string | null;
+  phone: string | null;
+  location: null;
+  socialLinks: null;
+} | {
   email: string | null;
   phone: string | null;
   location: string | null;
@@ -858,8 +919,56 @@ export type EXPERIENCE_QUERYResult = Array<{
 
 // Source: ./components/sections/HeroSection.tsx
 // Variable: HERO_QUERY
-// Query: *[_type == "profile"][0]{  firstName,  lastName,  headline,  shortBio,  email,  phone,  location,  availability,  socialLinks,  yearsOfExperience,  profileImage}
+// Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  headline,  shortBio,  email,  phone,  location,  availability,  socialLinks,  yearsOfExperience,  profileImage}
 export type HERO_QUERYResult = {
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: number | null;
+  profileImage: null;
+} | {
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: string | null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: string | null;
+  phone: string | null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
   firstName: string | null;
   lastName: string | null;
   headline: string | null;
@@ -980,11 +1089,11 @@ export type TESTIMONIALS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"profile\"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  email,\n  phone,\n  location\n}": ABOUT_QUERYResult;
+    "*[_id == \"singleton-profile\"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  stats,\n  email,\n  phone,\n  location\n}": ABOUT_QUERYResult;
     "*[_type == \"blog\"] | order(publishedAt desc)[0...3]{\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}": BLOG_QUERYResult;
-    "*[_type == \"profile\"][0]{\n  email,\n  phone,\n  location,\n  socialLinks\n}": PROFILE_QUERYResult;
+    "*[_id == \"singleton-profile\"][0]{\n  email,\n  phone,\n  location,\n  socialLinks\n}": PROFILE_QUERYResult;
     "*[_type == \"experience\"] | order(startDate desc){\n  company,\n  position,\n  employmentType,\n  location,\n  startDate,\n  endDate,\n  current,\n  description,\n  responsibilities,\n  achievements,\n  technologies[]->{name, category},\n  companyLogo,\n  companyWebsite\n}": EXPERIENCE_QUERYResult;
-    "*[_type == \"profile\"][0]{\n  firstName,\n  lastName,\n  headline,\n  shortBio,\n  email,\n  phone,\n  location,\n  availability,\n  socialLinks,\n  yearsOfExperience,\n  profileImage\n}": HERO_QUERYResult;
+    "*[_id == \"singleton-profile\"][0]{\n  firstName,\n  lastName,\n  headline,\n  shortBio,\n  email,\n  phone,\n  location,\n  availability,\n  socialLinks,\n  yearsOfExperience,\n  profileImage\n}": HERO_QUERYResult;
     "*[_type == \"project\" && featured == true] | order(order asc)[0...6]{\n  title,\n  slug,\n  tagline,\n  category,\n  techStack,\n  liveUrl,\n  githubUrl,\n  featured,\n  coverImage,\n  technologies[]->{name, category, color}\n}": PROJECTS_QUERYResult;
     "*[_type == \"skill\"] | order(category asc, order asc){\n  name,\n  category,\n  proficiency,\n  percentage,\n  yearsOfExperience,\n  color\n}": SKILLS_QUERYResult;
     "*[_type == \"testimonial\" && featured == true] | order(order asc){\n  name,\n  position,\n  company,\n  testimonial,\n  rating,\n  date,\n  avatar,\n  companyLogo,\n  linkedinUrl\n}": TESTIMONIALS_QUERYResult;

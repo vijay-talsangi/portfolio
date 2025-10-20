@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 
-const PROFILE_QUERY = defineQuery(`*[_type == "profile"][0]{
+const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   email,
   phone,
   location,

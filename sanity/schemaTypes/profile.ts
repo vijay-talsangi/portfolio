@@ -112,6 +112,38 @@ export default defineType({
       validation: (Rule) => Rule.min(0),
     }),
     defineField({
+      name: "stats",
+      title: "Profile Statistics",
+      type: "array",
+      description: "Key statistics to display on your about section",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "value",
+              title: "Value",
+              type: "string",
+              description: "E.g., '50+', '100%', '24/7'",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: {
+              title: "label",
+              subtitle: "value",
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "hourlyRate",
       title: "Hourly Rate (USD)",
       type: "number",

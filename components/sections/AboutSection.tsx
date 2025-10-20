@@ -2,11 +2,12 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PortableText } from "@portabletext/react";
 import { defineQuery } from "next-sanity";
 
-const ABOUT_QUERY = defineQuery(`*[_type == "profile"][0]{
+const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
   lastName,
   fullBio,
   yearsOfExperience,
+  stats,
   email,
   phone,
   location
@@ -91,35 +92,21 @@ export async function AboutSection() {
           )}
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-12 border-t">
-          {profile.yearsOfExperience && (
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">
-                {profile.yearsOfExperience}+
+        {/* Stats from CMS */}
+        {profile.stats && profile.stats.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-12 border-t">
+            {profile.stats.map((stat, idx) => (
+              <div key={`${stat.label}-${idx}`} className="text-center">
+                <div className="text-4xl font-bold text-primary mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-sm text-muted-foreground">
-                Years Experience
-              </div>
-            </div>
-          )}
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">50+</div>
-            <div className="text-sm text-muted-foreground">
-              Projects Completed
-            </div>
+            ))}
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">100%</div>
-            <div className="text-sm text-muted-foreground">
-              Client Satisfaction
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">24/7</div>
-            <div className="text-sm text-muted-foreground">Support</div>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );

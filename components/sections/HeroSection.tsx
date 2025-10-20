@@ -3,7 +3,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { defineQuery } from "next-sanity";
 
-const HERO_QUERY = defineQuery(`*[_type == "profile"][0]{
+const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
   lastName,
   headline,
