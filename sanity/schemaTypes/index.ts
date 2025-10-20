@@ -12,6 +12,7 @@ import service from "./service";
 import achievement from "./achievement";
 import contact from "./contact";
 import siteSettings from "./siteSettings";
+import navigation from "./navigation";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -27,5 +28,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     service,
     contact,
     siteSettings,
+    navigation,
   ],
 };

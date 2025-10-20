@@ -13,6 +13,19 @@
  */
 
 // Source: schema.json
+export type Navigation = {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  href?: string;
+  icon?: string;
+  isExternal?: boolean;
+  order?: number;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -733,8 +746,18 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = SiteSettings | Contact | Service | Blog | Achievement | Certification | Testimonial | Education | Experience | Skill | Project | Profile | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Navigation | SiteSettings | Contact | Service | Blog | Achievement | Certification | Testimonial | Education | Experience | Skill | Project | Profile | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./components/FloatingDock.tsx
+// Variable: NAVIGATION_QUERY
+// Query: *[_type == "navigation"] | order(order asc){  title,  href,  icon,  isExternal}
+export type NAVIGATION_QUERYResult = Array<{
+  title: string | null;
+  href: string | null;
+  icon: string | null;
+  isExternal: boolean | null;
+}>;
+
 // Source: ./components/sections/AboutSection.tsx
 // Variable: ABOUT_QUERY
 // Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  fullBio,  yearsOfExperience,  stats,  email,  phone,  location}
@@ -1089,6 +1112,7 @@ export type TESTIMONIALS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == \"navigation\"] | order(order asc){\n  title,\n  href,\n  icon,\n  isExternal\n}": NAVIGATION_QUERYResult;
     "*[_id == \"singleton-profile\"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  stats,\n  email,\n  phone,\n  location\n}": ABOUT_QUERYResult;
     "*[_type == \"blog\"] | order(publishedAt desc)[0...3]{\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}": BLOG_QUERYResult;
     "*[_id == \"singleton-profile\"][0]{\n  email,\n  phone,\n  location,\n  socialLinks\n}": PROFILE_QUERYResult;
