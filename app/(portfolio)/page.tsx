@@ -3,7 +3,11 @@ import {
   AboutSection,
   SkillsSection,
   ExperienceSection,
+  EducationSection,
   ProjectsSection,
+  CertificationsSection,
+  AchievementsSection,
+  ServicesSection,
   TestimonialsSection,
   BlogSection,
   ContactSection,
@@ -16,7 +20,11 @@ export default function Home() {
       <AboutSection />
       <SkillsSection />
       <ExperienceSection />
+      <EducationSection />
       <ProjectsSection />
+      <CertificationsSection />
+      <AchievementsSection />
+      <ServicesSection />
       <TestimonialsSection />
       <BlogSection />
       <ContactSection />
