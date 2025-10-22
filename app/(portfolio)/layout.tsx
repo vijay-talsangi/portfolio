@@ -4,6 +4,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SanityLive } from "@/sanity/lib/live";
 import "../globals.css";
 import { FloatingDock } from "@/components/FloatingDock";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import Script from "next/script";
+import SidebarToggle from "@/components/SidebarToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +35,24 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <Script
+            src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+            strategy="afterInteractive"
+          />
 
-          <FloatingDock />
+          <SidebarProvider defaultOpen={false}>
+            <SidebarInset className="">
+              <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 px-4 z-20">
+                <SidebarToggle className="ml-auto" />
+              </header>
+
+              {children}
+            </SidebarInset>
+
+            <AppSidebar side="right" />
+
+            <FloatingDock />
+          </SidebarProvider>
 
           {/* Live content API */}
           <SanityLive />

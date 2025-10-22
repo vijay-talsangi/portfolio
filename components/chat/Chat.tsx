@@ -74,6 +74,7 @@ export function Chat({ profile }: { profile: Profile | null }) {
         },
       ],
     },
+
     disclaimer: {
       text: "Disclaimer: This is my AI-powered twin. It may not be 100% accurate and should be verified for accuracy.",
     },
