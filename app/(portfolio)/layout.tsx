@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SanityLive } from "@/sanity/lib/live";
 import "../globals.css";
 import { FloatingDock } from "@/components/FloatingDock";
+import PortfolioContent from "@/components/PortfolioContent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
