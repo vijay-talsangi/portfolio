@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { defineQuery } from "next-sanity";
+import { ProfileImage } from "./ProfileImage";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -110,15 +110,14 @@ export async function HeroSection() {
 
           {/* Profile Image */}
           {profile.profileImage && (
-            <div className="relative aspect-square rounded-2xl overflow-hidden border-4 border-primary/20">
-              <Image
-                src={urlFor(profile.profileImage).width(600).height(600).url()}
-                alt={`${profile.firstName} ${profile.lastName}`}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+            <ProfileImage
+              imageUrl={urlFor(profile.profileImage)
+                .width(600)
+                .height(600)
+                .url()}
+              firstName={profile.firstName || ""}
+              lastName={profile.lastName || ""}
+            />
           )}
         </div>
       </div>
