@@ -1,6 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { IconExternalLink } from "@tabler/icons-react";
 
@@ -138,7 +139,7 @@ export async function CertificationsSection() {
                 </div>
 
                 {cert.credentialUrl && (
-                  <a
+                  <Link
                     href={cert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -146,7 +147,7 @@ export async function CertificationsSection() {
                   >
                     Verify Credential
                     <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
-                  </a>
+                  </Link>
                 )}
               </div>
             ))}

@@ -1,6 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { IconExternalLink } from "@tabler/icons-react";
 
@@ -123,7 +124,7 @@ export async function EducationSection() {
                 )}
 
                 {edu.website && (
-                  <a
+                  <Link
                     href={edu.website}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -131,7 +132,7 @@ export async function EducationSection() {
                   >
                     Visit Institution Website
                     <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>

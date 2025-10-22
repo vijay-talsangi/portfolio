@@ -1,6 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { IconExternalLink } from "@tabler/icons-react";
 
@@ -139,7 +140,7 @@ export async function AchievementsSection() {
                     )}
 
                     {achievement.url && (
-                      <a
+                      <Link
                         href={achievement.url}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -147,7 +148,7 @@ export async function AchievementsSection() {
                       >
                         Learn More
                         <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
-                      </a>
+                      </Link>
                     )}
                   </div>
                 ))}
@@ -217,7 +218,7 @@ export async function AchievementsSection() {
                     </div>
 
                     {achievement.url && (
-                      <a
+                      <Link
                         href={achievement.url}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -225,7 +226,7 @@ export async function AchievementsSection() {
                       >
                         Learn More
                         <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
-                      </a>
+                      </Link>
                     )}
                   </div>
                 ))}

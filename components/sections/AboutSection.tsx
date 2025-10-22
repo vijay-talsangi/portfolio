@@ -1,5 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { PortableText } from "@portabletext/react";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
 const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
@@ -64,14 +65,14 @@ export async function AboutSection() {
                     const href = value?.href || "";
                     const isExternal = href.startsWith("http");
                     return (
-                      <a
+                      <Link
                         href={href}
                         target={isExternal ? "_blank" : undefined}
                         rel={isExternal ? "noopener noreferrer" : undefined}
                         className="text-primary hover:underline"
                       >
                         {children}
-                      </a>
+                      </Link>
                     );
                   },
                 },

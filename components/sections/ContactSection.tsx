@@ -1,4 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
 const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
@@ -42,12 +43,12 @@ export async function ContactSection() {
                     <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
                       Email
                     </h4>
-                    <a
+                    <Link
                       href={`mailto:${profile.email}`}
                       className="text-muted-foreground hover:text-primary transition-colors text-xs @md/info:text-sm truncate block"
                     >
                       {profile.email}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -61,12 +62,12 @@ export async function ContactSection() {
                     <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
                       Phone
                     </h4>
-                    <a
+                    <Link
                       href={`tel:${profile.phone}`}
                       className="text-muted-foreground hover:text-primary transition-colors text-xs @md/info:text-sm"
                     >
                       {profile.phone}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -94,74 +95,74 @@ export async function ContactSection() {
                   </h4>
                   <div className="flex flex-wrap gap-2 @md/info:gap-3">
                     {profile.socialLinks.github && (
-                      <a
+                      <Link
                         href={profile.socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         GitHub
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.linkedin && (
-                      <a
+                      <Link
                         href={profile.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         LinkedIn
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.twitter && (
-                      <a
+                      <Link
                         href={profile.socialLinks.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Twitter
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.website && (
-                      <a
+                      <Link
                         href={profile.socialLinks.website}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Website
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.medium && (
-                      <a
+                      <Link
                         href={profile.socialLinks.medium}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Medium
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.devto && (
-                      <a
+                      <Link
                         href={profile.socialLinks.devto}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Dev.to
-                      </a>
+                      </Link>
                     )}
                     {profile.socialLinks.youtube && (
-                      <a
+                      <Link
                         href={profile.socialLinks.youtube}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         YouTube
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>

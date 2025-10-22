@@ -1,6 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
 const PROJECTS_QUERY =
@@ -102,24 +103,24 @@ export async function ProjectsSection() {
                   {/* Actions */}
                   <div className="flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
                     {project.liveUrl && (
-                      <a
+                      <Link
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
                       >
                         Live Demo
-                      </a>
+                      </Link>
                     )}
                     {project.githubUrl && (
-                      <a
+                      <Link
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm text-center"
                       >
                         GitHub
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
