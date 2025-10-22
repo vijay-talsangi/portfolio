@@ -56,10 +56,10 @@ export async function ExperienceSection() {
               {/* Timeline dot */}
               <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
 
-              <div className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex flex-wrap items-start gap-4 mb-4">
+              <div className="@container/card bg-card border rounded-lg p-4 @md/card:p-6 hover:shadow-lg transition-shadow">
+                <div className="flex flex-col @md/card:flex-row @md/card:items-start gap-4 mb-4">
                   {exp.companyLogo && (
-                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border">
+                    <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 rounded-lg overflow-hidden border shrink-0">
                       <Image
                         src={urlFor(exp.companyLogo).width(64).height(64).url()}
                         alt={`${exp.company} company logo`}
@@ -70,21 +70,23 @@ export async function ExperienceSection() {
                   )}
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-2xl font-semibold">{exp.position}</h3>
+                    <h3 className="text-xl @md/card:text-2xl font-semibold line-clamp-2">
+                      {exp.position}
+                    </h3>
                     <div className="flex flex-wrap items-center gap-2 mt-1">
-                      <p className="text-lg text-primary font-medium">
+                      <p className="text-base @md/card:text-lg text-primary font-medium truncate">
                         {exp.company}
                       </p>
                       {exp.employmentType && (
                         <>
                           <span className="text-muted-foreground">•</span>
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-xs @md/card:text-sm text-muted-foreground">
                             {exp.employmentType}
                           </span>
                         </>
                       )}
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 mt-2 text-sm text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-2 mt-2 text-xs @md/card:text-sm text-muted-foreground">
                       <span>
                         {exp.startDate && formatDate(exp.startDate)} -{" "}
                         {exp.current
@@ -96,7 +98,7 @@ export async function ExperienceSection() {
                       {exp.location && (
                         <>
                           <span>•</span>
-                          <span>{exp.location}</span>
+                          <span className="truncate">{exp.location}</span>
                         </>
                       )}
                     </div>
@@ -104,17 +106,17 @@ export async function ExperienceSection() {
                 </div>
 
                 {exp.description && (
-                  <div className="text-muted-foreground mb-4">
+                  <div className="text-muted-foreground mb-4 text-sm @md/card:text-base">
                     <PortableText value={exp.description} />
                   </div>
                 )}
 
                 {exp.responsibilities && exp.responsibilities.length > 0 && (
                   <div className="mb-4">
-                    <h4 className="font-semibold mb-2">
+                    <h4 className="font-semibold mb-2 text-sm @md/card:text-base">
                       Key Responsibilities:
                     </h4>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs @md/card:text-sm">
                       {exp.responsibilities.map((resp, idx) => (
                         <li key={`${exp.company}-resp-${idx}`}>{resp}</li>
                       ))}
@@ -124,8 +126,10 @@ export async function ExperienceSection() {
 
                 {exp.achievements && exp.achievements.length > 0 && (
                   <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Achievements:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                    <h4 className="font-semibold mb-2 text-sm @md/card:text-base">
+                      Achievements:
+                    </h4>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs @md/card:text-sm">
                       {exp.achievements.map((achievement, idx) => (
                         <li key={`${exp.company}-achievement-${idx}`}>
                           {achievement}
@@ -136,17 +140,21 @@ export async function ExperienceSection() {
                 )}
 
                 {exp.technologies && exp.technologies.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {exp.technologies.map((tech, techIdx) =>
-                      tech.name ? (
+                  <div className="flex flex-wrap gap-1.5 @md/card:gap-2 mt-4">
+                    {exp.technologies.map((tech, techIdx) => {
+                      const techData =
+                        tech && typeof tech === "object" && "name" in tech
+                          ? tech
+                          : null;
+                      return techData?.name ? (
                         <span
                           key={`${exp.company}-tech-${techIdx}`}
-                          className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary"
+                          className="px-2 py-0.5 @md/card:px-3 @md/card:py-1 text-xs rounded-full bg-primary/10 text-primary"
                         >
-                          {tech.name}
+                          {techData.name}
                         </span>
-                      ) : null
-                    )}
+                      ) : null;
+                    })}
                   </div>
                 )}
               </div>

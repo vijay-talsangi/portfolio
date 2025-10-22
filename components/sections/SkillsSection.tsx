@@ -54,44 +54,46 @@ export async function SkillsSection() {
                 <div key={category} className="space-y-6">
                   <h3 className="text-2xl font-semibold">{displayLabel}</h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {categorySkills.map((skill) => (
-                      <div
-                        key={skill.name || `skill-${category}`}
-                        className="p-6 rounded-lg border bg-card hover:shadow-lg transition-shadow"
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <h4 className="font-semibold text-lg">
-                            {skill.name}
-                          </h4>
-                          {skill.yearsOfExperience && (
-                            <span className="text-sm text-muted-foreground">
-                              {skill.yearsOfExperience}y
-                            </span>
+                  <div className="@container">
+                    <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-6">
+                      {categorySkills.map((skill) => (
+                        <div
+                          key={skill.name || `skill-${category}`}
+                          className="@container/card p-4 @md/card:p-6 rounded-lg border bg-card hover:shadow-lg transition-shadow"
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <h4 className="font-semibold text-base @md/card:text-lg truncate mr-2">
+                              {skill.name}
+                            </h4>
+                            {skill.yearsOfExperience && (
+                              <span className="text-xs @md/card:text-sm text-muted-foreground whitespace-nowrap">
+                                {skill.yearsOfExperience}y
+                              </span>
+                            )}
+                          </div>
+
+                          {skill.percentage && (
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-xs @md/card:text-sm">
+                                <span className="text-muted-foreground truncate mr-2">
+                                  {skill.proficiency}
+                                </span>
+                                <span>{skill.percentage}%</span>
+                              </div>
+                              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-primary transition-all"
+                                  style={{
+                                    width: `${skill.percentage}%`,
+                                    backgroundColor: skill.color || undefined,
+                                  }}
+                                />
+                              </div>
+                            </div>
                           )}
                         </div>
-
-                        {skill.percentage && (
-                          <div className="space-y-2">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">
-                                {skill.proficiency}
-                              </span>
-                              <span>{skill.percentage}%</span>
-                            </div>
-                            <div className="h-2 bg-muted rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-primary transition-all"
-                                style={{
-                                  width: `${skill.percentage}%`,
-                                  backgroundColor: skill.color || undefined,
-                                }}
-                              />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               );

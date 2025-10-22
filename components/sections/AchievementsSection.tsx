@@ -86,70 +86,72 @@ export async function AchievementsSection() {
               <span className="text-yellow-500">⭐</span>
               Featured Achievements
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featured.map((achievement) => (
-                <div
-                  key={`${achievement.title}-${achievement.date}`}
-                  className="bg-card border-2 border-primary/20 rounded-lg p-6 hover:shadow-lg transition-all hover:scale-[1.02]"
-                >
-                  {achievement.image && (
-                    <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
-                      <Image
-                        src={urlFor(achievement.image)
-                          .width(400)
-                          .height(200)
-                          .url()}
-                        alt={achievement.title || "Achievement"}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2 mb-3">
-                    {achievement.type && (
-                      <span
-                        className={`px-3 py-1 text-xs rounded-full font-medium ${getTypeColor(
-                          achievement.type
-                        )}`}
-                      >
-                        {getTypeLabel(achievement.type)}
-                      </span>
+            <div className="@container">
+              <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-6">
+                {featured.map((achievement) => (
+                  <div
+                    key={`${achievement.title}-${achievement.date}`}
+                    className="@container/card bg-card border-2 border-primary/20 rounded-lg p-6 hover:shadow-lg transition-all hover:scale-[1.02]"
+                  >
+                    {achievement.image && (
+                      <div className="relative w-full h-32 @md/card:h-48 mb-4 rounded-lg overflow-hidden">
+                        <Image
+                          src={urlFor(achievement.image)
+                            .width(400)
+                            .height(200)
+                            .url()}
+                          alt={achievement.title || "Achievement"}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     )}
-                    {achievement.date && (
-                      <span className="text-sm text-muted-foreground">
-                        {formatDate(achievement.date)}
-                      </span>
+
+                    <div className="flex flex-col @xs/card:flex-row @xs/card:items-center gap-2 mb-3">
+                      {achievement.type && (
+                        <span
+                          className={`px-2.5 py-1 text-xs rounded-full font-medium ${getTypeColor(
+                            achievement.type
+                          )}`}
+                        >
+                          {getTypeLabel(achievement.type)}
+                        </span>
+                      )}
+                      {achievement.date && (
+                        <span className="text-xs @md/card:text-sm text-muted-foreground">
+                          {formatDate(achievement.date)}
+                        </span>
+                      )}
+                    </div>
+
+                    <h4 className="text-lg @md/card:text-xl font-semibold mb-2">
+                      {achievement.title}
+                    </h4>
+                    {achievement.issuer && (
+                      <p className="text-primary font-medium mb-3 text-sm @md/card:text-base truncate">
+                        {achievement.issuer}
+                      </p>
+                    )}
+                    {achievement.description && (
+                      <p className="text-muted-foreground mb-4 text-sm @md/card:text-base line-clamp-3">
+                        {achievement.description}
+                      </p>
+                    )}
+
+                    {achievement.url && (
+                      <a
+                        href={achievement.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline"
+                      >
+                        Learn More
+                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                      </a>
                     )}
                   </div>
-
-                  <h4 className="text-xl font-semibold mb-2">
-                    {achievement.title}
-                  </h4>
-                  {achievement.issuer && (
-                    <p className="text-primary font-medium mb-3">
-                      {achievement.issuer}
-                    </p>
-                  )}
-                  {achievement.description && (
-                    <p className="text-muted-foreground mb-4">
-                      {achievement.description}
-                    </p>
-                  )}
-
-                  {achievement.url && (
-                    <a
-                      href={achievement.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
-                    >
-                      Learn More
-                      <IconExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -160,72 +162,74 @@ export async function AchievementsSection() {
             {featured.length > 0 && (
               <h3 className="text-2xl font-bold mb-6">All Achievements</h3>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regular.map((achievement) => (
-                <div
-                  key={`${achievement.title}-${achievement.date}`}
-                  className="bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
-                >
-                  {achievement.image && (
-                    <div className="relative w-full h-32 mb-4 rounded-lg overflow-hidden">
-                      <Image
-                        src={urlFor(achievement.image)
-                          .width(300)
-                          .height(128)
-                          .url()}
-                        alt={achievement.title || "Achievement"}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
+            <div className="@container">
+              <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-6">
+                {regular.map((achievement) => (
+                  <div
+                    key={`${achievement.title}-${achievement.date}`}
+                    className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
+                  >
+                    {achievement.image && (
+                      <div className="relative w-full h-24 @md/card:h-32 mb-4 rounded-lg overflow-hidden">
+                        <Image
+                          src={urlFor(achievement.image)
+                            .width(300)
+                            .height(128)
+                            .url()}
+                          alt={achievement.title || "Achievement"}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
 
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-3">
-                      {achievement.type && (
-                        <span
-                          className={`px-2 py-1 text-xs rounded-full font-medium ${getTypeColor(
-                            achievement.type
-                          )}`}
-                        >
-                          {getTypeLabel(achievement.type)}
-                        </span>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        {achievement.type && (
+                          <span
+                            className={`px-2 py-0.5 @md/card:py-1 text-xs rounded-full font-medium ${getTypeColor(
+                              achievement.type
+                            )}`}
+                          >
+                            {getTypeLabel(achievement.type)}
+                          </span>
+                        )}
+                      </div>
+
+                      <h4 className="text-base @md/card:text-lg font-semibold mb-2 line-clamp-2">
+                        {achievement.title}
+                      </h4>
+                      {achievement.issuer && (
+                        <p className="text-primary font-medium mb-2 text-xs @md/card:text-sm truncate">
+                          {achievement.issuer}
+                        </p>
+                      )}
+                      {achievement.date && (
+                        <p className="text-xs @md/card:text-sm text-muted-foreground mb-3">
+                          {formatDate(achievement.date)}
+                        </p>
+                      )}
+                      {achievement.description && (
+                        <p className="text-xs @md/card:text-sm text-muted-foreground line-clamp-3">
+                          {achievement.description}
+                        </p>
                       )}
                     </div>
 
-                    <h4 className="text-lg font-semibold mb-2">
-                      {achievement.title}
-                    </h4>
-                    {achievement.issuer && (
-                      <p className="text-primary font-medium mb-2 text-sm">
-                        {achievement.issuer}
-                      </p>
-                    )}
-                    {achievement.date && (
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {formatDate(achievement.date)}
-                      </p>
-                    )}
-                    {achievement.description && (
-                      <p className="text-sm text-muted-foreground line-clamp-3">
-                        {achievement.description}
-                      </p>
+                    {achievement.url && (
+                      <a
+                        href={achievement.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline mt-4 pt-4 border-t"
+                      >
+                        Learn More
+                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                      </a>
                     )}
                   </div>
-
-                  {achievement.url && (
-                    <a
-                      href={achievement.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:underline mt-4 pt-4 border-t"
-                    >
-                      Learn More
-                      <IconExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         )}

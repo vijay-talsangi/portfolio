@@ -748,10 +748,25 @@ export type SanityAssetSourceData = {
 
 export type AllSanitySchemaTypes = Navigation | SiteSettings | Contact | Service | Blog | Achievement | Certification | Testimonial | Education | Experience | Skill | Project | Profile | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./app/(portfolio)/chat/page.tsx
+// Source: ./components/FloatingDock.tsx
+// Variable: NAVIGATION_QUERY
+// Query: *[_type == "navigation"] | order(order asc){  title,  href,  icon,  isExternal}
+export type NAVIGATION_QUERYResult = Array<{
+  title: string | null;
+  href: string | null;
+  icon: string | null;
+  isExternal: boolean | null;
+}>;
+
+// Source: ./components/chat/ChatWrapper.tsx
 // Variable: CHAT_PROFILE_QUERY
-// Query: *[_id == "singleton-profile"][0]{    firstName,    lastName,    headline,    shortBio,    email,    phone,    location,    availability,    socialLinks,    yearsOfExperience,    profileImage  }
+// Query: *[_id == "singleton-profile"][0]{    _id,    _type,    _createdAt,    _updatedAt,    _rev,    firstName,    lastName,    headline,    shortBio,    email,    phone,    location,    availability,    socialLinks,    yearsOfExperience,    profileImage  }
 export type CHAT_PROFILE_QUERYResult = {
+  _id: string;
+  _type: "achievement";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   firstName: null;
   lastName: null;
   headline: null;
@@ -764,6 +779,11 @@ export type CHAT_PROFILE_QUERYResult = {
   yearsOfExperience: null;
   profileImage: null;
 } | {
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   firstName: null;
   lastName: null;
   headline: null;
@@ -773,21 +793,31 @@ export type CHAT_PROFILE_QUERYResult = {
   location: null;
   availability: null;
   socialLinks: null;
-  yearsOfExperience: number | null;
+  yearsOfExperience: null;
   profileImage: null;
 } | {
+  _id: string;
+  _type: "certification";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   firstName: null;
   lastName: null;
   headline: null;
   shortBio: null;
   email: null;
   phone: null;
-  location: string | null;
+  location: null;
   availability: null;
   socialLinks: null;
   yearsOfExperience: null;
   profileImage: null;
 } | {
+  _id: string;
+  _type: "contact";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   firstName: null;
   lastName: null;
   headline: null;
@@ -800,6 +830,62 @@ export type CHAT_PROFILE_QUERYResult = {
   yearsOfExperience: null;
   profileImage: null;
 } | {
+  _id: string;
+  _type: "education";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "experience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: string | null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "profile";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   firstName: string | null;
   lastName: string | null;
   headline: string | null;
@@ -832,17 +918,126 @@ export type CHAT_PROFILE_QUERYResult = {
     alt?: string;
     _type: "image";
   } | null;
+} | {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "skill";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: number | null;
+  profileImage: null;
+} | {
+  _id: string;
+  _type: "testimonial";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: null;
+  lastName: null;
+  headline: null;
+  shortBio: null;
+  email: null;
+  phone: null;
+  location: null;
+  availability: null;
+  socialLinks: null;
+  yearsOfExperience: null;
+  profileImage: null;
 } | null;
-
-// Source: ./components/FloatingDock.tsx
-// Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"] | order(order asc){  title,  href,  icon,  isExternal}
-export type NAVIGATION_QUERYResult = Array<{
-  title: string | null;
-  href: string | null;
-  icon: string | null;
-  isExternal: boolean | null;
-}>;
 
 // Source: ./components/sections/AboutSection.tsx
 // Variable: ABOUT_QUERY
@@ -1336,8 +1531,8 @@ export type TESTIMONIALS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_id == \"singleton-profile\"][0]{\n    firstName,\n    lastName,\n    headline,\n    shortBio,\n    email,\n    phone,\n    location,\n    availability,\n    socialLinks,\n    yearsOfExperience,\n    profileImage\n  }": CHAT_PROFILE_QUERYResult;
     "*[_type == \"navigation\"] | order(order asc){\n  title,\n  href,\n  icon,\n  isExternal\n}": NAVIGATION_QUERYResult;
+    "*[_id == \"singleton-profile\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    firstName,\n    lastName,\n    headline,\n    shortBio,\n    email,\n    phone,\n    location,\n    availability,\n    socialLinks,\n    yearsOfExperience,\n    profileImage\n  }": CHAT_PROFILE_QUERYResult;
     "*[_id == \"singleton-profile\"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  stats,\n  email,\n  phone,\n  location\n}": ABOUT_QUERYResult;
     "*[_type == \"achievement\"] | order(date desc){\n  title,\n  type,\n  issuer,\n  date,\n  description,\n  image,\n  url,\n  featured,\n  order\n}": ACHIEVEMENTS_QUERYResult;
     "*[_type == \"blog\"] | order(publishedAt desc)[0...3]{\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}": BLOG_QUERYResult;

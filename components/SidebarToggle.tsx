@@ -21,7 +21,7 @@ function SidebarToggle({ className }: { className?: string }) {
     );
   }
 
-  if (openMobile) {
+  if (isMobile && openMobile) {
     return (
       <Button
         variant="outline"
