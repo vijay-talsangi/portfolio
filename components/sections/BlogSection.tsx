@@ -5,7 +5,7 @@ import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
 const BLOG_QUERY =
-  defineQuery(`*[_type == "blog"] | order(publishedAt desc)[0...3]{
+  defineQuery(`*[_type == "blog"] | order(publishedAt desc)[0...6]{
   title,
   slug,
   excerpt,

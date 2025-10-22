@@ -4,6 +4,7 @@ import Image from "next/image";
 import { defineQuery } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import { IconCheck } from "@tabler/icons-react";
+import { Star } from "lucide-react";
 
 const SERVICES_QUERY =
   defineQuery(`*[_type == "service"] | order(order asc, _createdAt desc){
@@ -79,7 +80,7 @@ export async function ServicesSection() {
         {featured.length > 0 && (
           <div className="mb-12">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-yellow-500">⭐</span>
+              <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
               Featured Services
             </h3>
             <div className="@container">

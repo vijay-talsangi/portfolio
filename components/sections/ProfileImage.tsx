@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
+import { useSidebar } from "../ui/sidebar";
 
 interface ProfileImageProps {
   imageUrl: string;
@@ -17,13 +17,16 @@ export function ProfileImage({
   lastName,
 }: ProfileImageProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { toggleSidebar, open } = useSidebar();
 
   return (
-    <Link
-      href="/chat"
-      className="relative aspect-square rounded-2xl overflow-hidden border-4 border-primary/20 block group cursor-pointer"
+    <button
+      type="button"
+      onClick={toggleSidebar}
+      className="relative aspect-square rounded-2xl overflow-hidden border-4 border-primary/20 block group cursor-pointer w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      aria-label="Toggle AI Chat Sidebar"
     >
       <Image
         src={imageUrl}
@@ -49,15 +52,20 @@ export function ProfileImage({
         }`}
       >
         <div className="text-center space-y-3">
-          <MessageCircle className="w-12 h-12 text-white mx-auto" />
+          {open ? (
+            <X className="w-12 h-12 text-white mx-auto" />
+          ) : (
+            <MessageCircle className="w-12 h-12 text-white mx-auto" />
+          )}
+
           <div className="text-white text-xl font-semibold">
-            💬 Chat with AI Twin
+            {open ? "Close Chat" : "Chat with AI Twin"}
           </div>
           <div className="text-white/80 text-sm">
-            Click to start conversation
+            {open ? "Click to close chat" : "Click to open chat"}
           </div>
         </div>
       </div>
-    </Link>
+    </button>
   );
 }
