@@ -1,10 +1,10 @@
 "use client";
 
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { MessageSquare } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useSidebar } from "./ui/sidebar";
-import { cn } from "@/lib/utils";
-import { SignInButton, useUser } from "@clerk/nextjs";
 
 function SidebarToggle({ className }: { className?: string }) {
   const { toggleSidebar, open, isMobile, openMobile } = useSidebar();
@@ -34,7 +34,7 @@ function SidebarToggle({ className }: { className?: string }) {
         className={cn(
           "transition-all duration-200",
           isSidebarOpen && "bg-primary text-primary-foreground shadow-md",
-          className
+          className,
         )}
       >
         <MessageSquare className="h-4 w-4 transition-transform duration-200" />

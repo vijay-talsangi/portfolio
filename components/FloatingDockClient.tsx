@@ -1,8 +1,8 @@
 "use client";
 
-import { DynamicIcon } from "./DynamicIcon";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { IconLogout, IconMessageCircle } from "@tabler/icons-react";
+import { DynamicIcon } from "./DynamicIcon";
 import { useSidebar } from "./ui/sidebar";
 
 interface NavItem {

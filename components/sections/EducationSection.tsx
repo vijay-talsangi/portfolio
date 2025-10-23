@@ -1,9 +1,9 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { IconExternalLink } from "@tabler/icons-react";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const EDUCATION_QUERY =
   defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){
@@ -95,8 +95,8 @@ export async function EducationSection() {
                         {edu.current
                           ? "Present"
                           : edu.endDate
-                          ? formatDate(edu.endDate)
-                          : "N/A"}
+                            ? formatDate(edu.endDate)
+                            : "N/A"}
                       </span>
                     </div>
                   </div>

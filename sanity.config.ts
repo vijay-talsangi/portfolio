@@ -4,16 +4,15 @@
  * This configuration is used to for the Sanity Studio that's mounted on the `/app/studio/[[...tool]]/page.tsx` route
  */
 
+import { RocketIcon } from "@sanity/icons";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
+import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
-import { RocketIcon } from "@sanity/icons";
-
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
 import { structure } from "./sanity/structure";
-import { presentationTool } from "sanity/presentation";
 
 export default defineConfig({
   basePath: "/studio",

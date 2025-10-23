@@ -1,9 +1,9 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { IconExternalLink } from "@tabler/icons-react";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const ACHIEVEMENTS_QUERY =
   defineQuery(`*[_type == "achievement"] | order(date desc){
@@ -112,7 +112,7 @@ export async function AchievementsSection() {
                       {achievement.type && (
                         <span
                           className={`px-2.5 py-1 text-xs rounded-full font-medium ${getTypeColor(
-                            achievement.type
+                            achievement.type,
                           )}`}
                         >
                           {getTypeLabel(achievement.type)}
@@ -189,7 +189,7 @@ export async function AchievementsSection() {
                         {achievement.type && (
                           <span
                             className={`px-2 py-0.5 @md/card:py-1 text-xs rounded-full font-medium ${getTypeColor(
-                              achievement.type
+                              achievement.type,
                             )}`}
                           >
                             {getTypeLabel(achievement.type)}

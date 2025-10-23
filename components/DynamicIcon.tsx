@@ -1,7 +1,7 @@
 "use client";
 
-import { IconQuestionMark } from "@tabler/icons-react";
 import * as TablerIcons from "@tabler/icons-react";
+import { IconQuestionMark } from "@tabler/icons-react";
 
 interface DynamicIconProps {
   iconName: string;

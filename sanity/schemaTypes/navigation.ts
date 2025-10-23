@@ -15,7 +15,8 @@ export default defineType({
       name: "href",
       title: "Link URL",
       type: "string",
-      description: "Page anchor (e.g., '#about') or external URL (e.g., 'https://github.com/username')",
+      description:
+        "Page anchor (e.g., '#about') or external URL (e.g., 'https://github.com/username')",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -63,4 +64,3 @@ export default defineType({
     },
   ],
 });
-

@@ -1,7 +1,7 @@
-import { sanityFetch } from "@/sanity/lib/live";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,

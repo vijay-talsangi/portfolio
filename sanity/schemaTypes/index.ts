@@ -1,18 +1,17 @@
 import type { SchemaTypeDefinition } from "sanity";
-
+import achievement from "./achievement";
+import blog from "./blog";
+import certification from "./certification";
+import contact from "./contact";
+import education from "./education";
+import experience from "./experience";
+import navigation from "./navigation";
 import profile from "./profile";
 import project from "./project";
+import service from "./service";
+import siteSettings from "./siteSettings";
 import skill from "./skill";
 import testimonial from "./testimonial";
-import experience from "./experience";
-import education from "./education";
-import certification from "./certification";
-import blog from "./blog";
-import service from "./service";
-import achievement from "./achievement";
-import contact from "./contact";
-import siteSettings from "./siteSettings";
-import navigation from "./navigation";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [

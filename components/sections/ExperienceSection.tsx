@@ -1,8 +1,8 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { defineQuery } from "next-sanity";
-import { PortableText } from "@portabletext/react";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const EXPERIENCE_QUERY =
   defineQuery(`*[_type == "experience"] | order(startDate desc){
@@ -92,8 +92,8 @@ export async function ExperienceSection() {
                         {exp.current
                           ? "Present"
                           : exp.endDate
-                          ? formatDate(exp.endDate)
-                          : "N/A"}
+                            ? formatDate(exp.endDate)
+                            : "N/A"}
                       </span>
                       {exp.location && (
                         <>

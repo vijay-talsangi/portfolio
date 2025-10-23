@@ -1,5 +1,5 @@
-import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const SKILLS_QUERY =
   defineQuery(`*[_type == "skill"] | order(category asc, order asc){
@@ -97,7 +97,7 @@ export async function SkillsSection() {
                   </div>
                 </div>
               );
-            }
+            },
           )}
         </div>
       </div>
