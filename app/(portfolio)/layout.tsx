@@ -44,17 +44,12 @@ export default async function RootLayout({
           />
 
           <SidebarProvider defaultOpen={false}>
-            <SidebarInset className="">
-              <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 px-4 z-20">
-                <SidebarToggle className="ml-auto" />
-              </header>
-
-              {children}
-            </SidebarInset>
+            <SidebarInset className="">{children}</SidebarInset>
 
             <AppSidebar side="right" />
 
             <FloatingDock />
+            <SidebarToggle />
           </SidebarProvider>
 
           {/* Live content API */}
