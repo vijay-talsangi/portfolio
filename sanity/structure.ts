@@ -129,12 +129,33 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Messages & Settings
+      // Contact Form Submissions
       S.listItem()
         .title("Contact Form Submissions")
         .icon(InlineIcon)
-        .schemaType("contact")
-        .child(S.documentTypeList("contact").title("Contact Form Submissions")),
+        .child(
+          S.list()
+            .title("Contact Form Submissions")
+            .items([
+              S.listItem()
+                .title("New Submissions")
+                .icon(InlineIcon)
+                .child(
+                  S.documentTypeList("contact")
+                    .title("New Submissions")
+                    .filter('_type == "contact" && status == "new"')
+                ),
+
+              S.listItem()
+                .title("Archived")
+                .icon(InlineIcon)
+                .child(
+                  S.documentTypeList("contact")
+                    .title("Archived Submissions")
+                    .filter('_type == "contact" && status == "archived"')
+                ),
+            ])
+        ),
 
       S.divider(),
 

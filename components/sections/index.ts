@@ -10,3 +10,4 @@ export { ServicesSection } from "./ServicesSection";
 export { TestimonialsSection } from "./TestimonialsSection";
 export { BlogSection } from "./BlogSection";
 export { ContactSection } from "./ContactSection";
+export { ContactForm } from "./ContactForm";

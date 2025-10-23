@@ -30,26 +30,6 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "company",
-      title: "Company",
-      type: "string",
-    }),
-    defineField({
-      name: "phone",
-      title: "Phone Number",
-      type: "string",
-    }),
-    defineField({
-      name: "budget",
-      title: "Project Budget",
-      type: "string",
-    }),
-    defineField({
-      name: "timeline",
-      title: "Project Timeline",
-      type: "string",
-    }),
-    defineField({
       name: "submittedAt",
       title: "Submitted At",
       type: "datetime",
@@ -62,10 +42,7 @@ export default defineType({
       options: {
         list: [
           { title: "New", value: "new" },
-          { title: "In Progress", value: "in-progress" },
-          { title: "Replied", value: "replied" },
-          { title: "Closed", value: "closed" },
-          { title: "Spam", value: "spam" },
+          { title: "Archived", value: "archived" },
         ],
       },
       initialValue: "new",
@@ -76,20 +53,6 @@ export default defineType({
       type: "text",
       rows: 3,
       description: "Private notes about this inquiry",
-    }),
-    defineField({
-      name: "priority",
-      title: "Priority",
-      type: "string",
-      options: {
-        list: [
-          { title: "Low", value: "low" },
-          { title: "Medium", value: "medium" },
-          { title: "High", value: "high" },
-          { title: "Urgent", value: "urgent" },
-        ],
-      },
-      initialValue: "medium",
     }),
   ],
   preview: {
@@ -102,10 +65,7 @@ export default defineType({
       const { title, subtitle, status } = selection;
       const statusEmoji = {
         new: "🆕",
-        "in-progress": "⏳",
-        replied: "✅",
-        closed: "📁",
-        spam: "🚫",
+        archived: "📁",
       };
       return {
         title: `${
