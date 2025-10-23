@@ -1,9 +1,10 @@
-import { IconExternalLink } from "@tabler/icons-react";
+import { IconExternalLink, IconCalendar, IconAward } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import DottedGlowBackground from "@/components/ui/dotted-glow-background";
 
 const EDUCATION_QUERY =
   defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){
@@ -36,8 +37,24 @@ export async function EducationSection() {
   };
 
   return (
-    <section className="py-20 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-6xl">
+    <section className="relative py-20 px-6 bg-muted/30 overflow-hidden">
+      {/* Section-wide Dotted Glow Background */}
+      {/* <DottedGlowBackground
+        className="pointer-events-none opacity-30 dark:opacity-50 mask-radial-to-75% mask-radial-at-bottom"
+        opacity={0.5}
+        gap={10}
+        radius={3.5}
+        colorLightVar="--color-neutral-400"
+        glowColorLightVar="--color-primary"
+        colorDarkVar="--color-neutral-600"
+        glowColorDarkVar="--color-primary"
+        backgroundOpacity={0}
+        speedMin={0.2}
+        speedMax={0.8}
+        speedScale={1.2}
+      /> */}
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Education</h2>
           <p className="text-xl text-muted-foreground">
@@ -45,19 +62,20 @@ export async function EducationSection() {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {education.map((edu) => (
             <div
               key={`${edu.institution}-${edu.degree}-${edu.startDate}`}
-              className="relative pl-8 pb-8 border-l-2 border-muted last:border-l-0"
+              className="group relative bg-card border rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
             >
-              {/* Timeline dot */}
-              <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+              {/* Accent gradient bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/60 to-primary/30 z-10" />
 
-              <div className="@container/card bg-card border rounded-lg p-4 @md/card:p-6 hover:shadow-lg transition-shadow">
-                <div className="flex flex-col @md/card:flex-row @md/card:items-start gap-4 mb-4">
+              <div className="relative z-10 p-6">
+                {/* Header with logo and basic info */}
+                <div className="flex items-start gap-4 mb-4">
                   {edu.logo && (
-                    <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 rounded-lg overflow-hidden border shrink-0">
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border-2 border-primary/20 shrink-0 group-hover:border-primary/40 transition-colors">
                       <Image
                         src={urlFor(edu.logo).width(64).height(64).url()}
                         alt={`${edu.institution} logo`}
@@ -68,70 +86,79 @@ export async function EducationSection() {
                   )}
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl @md/card:text-2xl font-semibold line-clamp-2">
+                    <h3 className="text-xl font-bold mb-1 line-clamp-2 group-hover:text-primary transition-colors">
                       {edu.degree}
                     </h3>
+                    <p className="text-lg font-medium text-primary mb-1">
+                      {edu.institution}
+                    </p>
                     {edu.fieldOfStudy && (
-                      <p className="text-base @md/card:text-lg text-muted-foreground mt-1 truncate">
+                      <p className="text-sm text-muted-foreground">
                         {edu.fieldOfStudy}
                       </p>
                     )}
-                    <div className="flex flex-wrap items-center gap-2 mt-2">
-                      <p className="text-base @md/card:text-lg text-primary font-medium truncate">
-                        {edu.institution}
-                      </p>
-                      {edu.gpa && (
-                        <>
-                          <span className="text-muted-foreground">•</span>
-                          <span className="text-xs @md/card:text-sm text-muted-foreground">
-                            GPA: {edu.gpa}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2 mt-2 text-xs @md/card:text-sm text-muted-foreground">
-                      <span>
-                        {edu.startDate && formatDate(edu.startDate)} -{" "}
-                        {edu.current
-                          ? "Present"
-                          : edu.endDate
-                            ? formatDate(edu.endDate)
-                            : "N/A"}
-                      </span>
-                    </div>
                   </div>
                 </div>
 
-                {edu.description && (
-                  <div className="text-muted-foreground mb-4 text-sm @md/card:text-base">
-                    <p>{edu.description}</p>
+                {/* Date and GPA badges */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm">
+                    <IconCalendar className="w-3.5 h-3.5" />
+                    <span>
+                      {edu.startDate && formatDate(edu.startDate)} -{" "}
+                      {edu.current
+                        ? "Present"
+                        : edu.endDate
+                          ? formatDate(edu.endDate)
+                          : "N/A"}
+                    </span>
                   </div>
+                  {edu.gpa && (
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                      <IconAward className="w-3.5 h-3.5" />
+                      <span>GPA: {edu.gpa}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Description */}
+                {edu.description && (
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    {edu.description}
+                  </p>
                 )}
 
+                {/* Achievements */}
                 {edu.achievements && edu.achievements.length > 0 && (
-                  <div className="mb-4">
-                    <h4 className="font-semibold mb-2 text-sm @md/card:text-base">
-                      Achievements & Honors:
+                  <div className="mb-4 p-3 rounded-lg bg-muted/50">
+                    <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
+                      <IconAward className="w-4 h-4 text-primary" />
+                      Achievements & Honors
                     </h4>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs @md/card:text-sm">
+                    <ul className="space-y-1.5">
                       {edu.achievements.map((achievement, idx) => (
-                        <li key={`${edu.institution}-achievement-${idx}`}>
-                          {achievement}
+                        <li
+                          key={`${edu.institution}-achievement-${idx}`}
+                          className="text-xs text-muted-foreground flex items-start gap-2"
+                        >
+                          <span className="text-primary mt-1">▸</span>
+                          <span className="flex-1">{achievement}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 )}
 
+                {/* Website link */}
                 {edu.website && (
                   <Link
                     href={edu.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline mt-2"
+                    className="inline-flex items-center gap-2 text-sm text-primary hover:underline font-medium group-hover:gap-3 transition-all"
                   >
-                    Visit Institution Website
-                    <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                    Visit Website
+                    <IconExternalLink className="w-4 h-4" />
                   </Link>
                 )}
               </div>

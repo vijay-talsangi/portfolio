@@ -1,4 +1,4 @@
-import { IconExternalLink } from "@tabler/icons-react";
+import { IconExternalLink, IconStar } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
@@ -84,7 +84,7 @@ export async function AchievementsSection() {
         {featured.length > 0 && (
           <div className="mb-12">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-yellow-500">⭐</span>
+              <IconStar className="w-6 h-6 text-yellow-500 fill-yellow-500" />
               Featured Achievements
             </h3>
             <div className="@container">
