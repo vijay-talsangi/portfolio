@@ -26,7 +26,10 @@ export async function HeroSection() {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center px-6 py-20"
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="@container">
           <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8 @lg:gap-12 items-center">

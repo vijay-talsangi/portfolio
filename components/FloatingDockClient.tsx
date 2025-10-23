@@ -2,6 +2,7 @@
 
 import { useClerk, useUser } from "@clerk/nextjs";
 import { IconLogout, IconMessageCircle } from "@tabler/icons-react";
+import Link from "next/link";
 import { DynamicIcon } from "./DynamicIcon";
 import { useSidebar } from "./ui/sidebar";
 
@@ -114,11 +115,12 @@ function DockIcon({ item }: { item: DockLink }) {
     }
 
     return (
-      <a
+      <Link
         href={item.href || "#"}
         target={item.isExternal ? "_blank" : undefined}
         rel={item.isExternal ? "noopener noreferrer" : undefined}
         className={buttonClasses}
+        scroll={!item.isExternal}
       >
         <div className="w-5 h-5 text-gray-800 dark:text-gray-100">
           {item.icon}
@@ -126,7 +128,7 @@ function DockIcon({ item }: { item: DockLink }) {
         <span className="hidden md:inline text-sm font-medium text-gray-800 dark:text-gray-100">
           {item.title}
         </span>
-      </a>
+      </Link>
     );
   }
 
@@ -146,14 +148,15 @@ function DockIcon({ item }: { item: DockLink }) {
 
   // Priority 2: Default to link behavior with href
   return (
-    <a
+    <Link
       href={item.href || "#"}
       target={item.isExternal ? "_blank" : undefined}
       rel={item.isExternal ? "noopener noreferrer" : undefined}
       className="group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12"
+      scroll={!item.isExternal}
     >
       <div className={iconClasses}>{iconContent}</div>
       {tooltipContent}
-    </a>
+    </Link>
   );
 }

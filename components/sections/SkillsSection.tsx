@@ -28,7 +28,7 @@ export async function SkillsSection() {
   }
 
   return (
-    <section className="py-20 px-6 bg-muted/30">
+    <section id="skills" className="py-20 px-6 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

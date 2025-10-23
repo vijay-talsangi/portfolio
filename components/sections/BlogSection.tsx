@@ -5,7 +5,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 
 const BLOG_QUERY =
-  defineQuery(`*[_type == "blog"] | order(publishedAt desc)[0...6]{
+  defineQuery(`*[_type == "blog"] | order(publishedAt desc)[0...3]{
   title,
   slug,
   excerpt,
