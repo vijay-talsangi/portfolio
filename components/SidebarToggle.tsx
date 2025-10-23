@@ -5,7 +5,6 @@ import { Button } from "./ui/button";
 import { useSidebar } from "./ui/sidebar";
 import { cn } from "@/lib/utils";
 import { SignInButton, useUser } from "@clerk/nextjs";
-import { ChevronRightIcon } from "@sanity/icons";
 
 function SidebarToggle({ className }: { className?: string }) {
   const { toggleSidebar, open, isMobile, openMobile } = useSidebar();
@@ -22,37 +21,27 @@ function SidebarToggle({ className }: { className?: string }) {
   }
 
   if (isMobile && openMobile) {
-    return (
-      <Button
-        variant="outline"
-        onClick={toggleSidebar}
-        className={cn("w-full", className)}
-      >
-        Close Chat
-      </Button>
-    );
+    return null;
   }
 
   const isSidebarOpen = isMobile ? openMobile : open;
 
   return (
-    <Button
-      variant={isSidebarOpen ? "default" : "outline"}
-      onClick={toggleSidebar}
-      className={cn(
-        "transition-all duration-200",
-        isSidebarOpen && "bg-primary text-primary-foreground shadow-md",
-        className
-      )}
-    >
-      {isSidebarOpen ? (
-        <ChevronRightIcon className="h-4 w-4 transition-transform duration-200" />
-      ) : (
+    !isSidebarOpen && (
+      <Button
+        variant={isSidebarOpen ? "default" : "outline"}
+        onClick={toggleSidebar}
+        className={cn(
+          "transition-all duration-200",
+          isSidebarOpen && "bg-primary text-primary-foreground shadow-md",
+          className
+        )}
+      >
         <MessageSquare className="h-4 w-4 transition-transform duration-200" />
-      )}
 
-      {!isSidebarOpen && "Chat to my AI Twin"}
-    </Button>
+        {!isSidebarOpen && "Chat to my AI Twin"}
+      </Button>
+    )
   );
 }
 

@@ -3,8 +3,10 @@
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { createSession } from "@/app/actions/create-session";
 import type { Profile } from "@/sanity.types";
+import { useSidebar } from "../ui/sidebar";
 
 export function Chat({ profile }: { profile: Profile | null }) {
+  const { toggleSidebar } = useSidebar();
   // Generate greeting based on available profile data
   const getGreeting = () => {
     if (!profile?.firstName) {
@@ -28,6 +30,17 @@ export function Chat({ profile }: { profile: Profile | null }) {
     },
     // https://chatkit.studio/playground
     theme: {},
+    header: {
+      title: {
+        text: `Chat with ${profile?.firstName || "Me"} `,
+      },
+      leftAction: {
+        icon: "close",
+        onClick: () => {
+          toggleSidebar();
+        },
+      },
+    },
     startScreen: {
       greeting: getGreeting(),
       prompts: [
