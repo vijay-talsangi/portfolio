@@ -140,3 +140,12 @@
 .animate-cell-ripple {
   animation: cell-ripple var(--duration, 500ms) ease-out var(--delay, 0ms);
 }
+
+/* 3D Transform and Perspective for CometCard */
+.perspective-distant {
+  perspective: 2000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
