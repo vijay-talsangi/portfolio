@@ -4,8 +4,7 @@ import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 
-const BLOG_QUERY =
-  defineQuery(`*[_type == "blog"] | order(publishedAt desc)[0...3]{
+const BLOG_QUERY = defineQuery(`*[_type == "blog"] | order(publishedAt desc){
   title,
   slug,
   excerpt,
@@ -34,7 +33,7 @@ export async function BlogSection() {
   };
 
   return (
-    <section className="py-20 px-6 bg-muted/30">
+    <section id="blog" className="py-20 px-6 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -121,15 +120,6 @@ export async function BlogSection() {
               </article>
             ))}
           </div>
-        </div>
-
-        <div className="text-center mt-12">
-          <Link
-            href="/blog"
-            className="inline-flex items-center px-6 py-3 rounded-lg border hover:bg-accent transition-colors"
-          >
-            View All Posts
-          </Link>
         </div>
       </div>
     </section>

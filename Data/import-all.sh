@@ -67,6 +67,7 @@ FILES=(
     "achievements.ndjson"
     "certifications.ndjson"
     "testimonials.ndjson"
+    "navigation.ndjson"
     "siteSettings.ndjson"
     "contact.ndjson"
 )

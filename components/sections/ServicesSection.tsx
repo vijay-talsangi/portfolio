@@ -69,7 +69,7 @@ export async function ServicesSection() {
   const regular = services.filter((s) => !s.featured);
 
   return (
-    <section className="py-20 px-6">
+    <section id="services" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Services</h2>
