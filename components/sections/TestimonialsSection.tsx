@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const TESTIMONIALS_QUERY =
   defineQuery(`*[_type == "testimonial" && featured == true] | order(order asc){

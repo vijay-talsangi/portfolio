@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useClerk, useUser } from "@clerk/nextjs";
 import {
   IconLogout,
@@ -9,6 +8,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useState } from "react";
 import { DynamicIcon } from "./DynamicIcon";
 import { useSidebar } from "./ui/sidebar";
 

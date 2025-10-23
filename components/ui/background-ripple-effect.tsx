@@ -1,6 +1,6 @@
 "use client";
-import { useMemo, useRef, useState } from "react";
 import type React from "react";
+import { useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
@@ -63,8 +63,8 @@ type DivGridProps = {
 };
 
 type CellStyle = React.CSSProperties & {
-  ["--delay"]?: string;
-  ["--duration"]?: string;
+  "--delay"?: string;
+  "--duration"?: string;
 };
 
 const DivGrid = ({

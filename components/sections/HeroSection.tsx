@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
-import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
