@@ -4,11 +4,15 @@ import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
+import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
   lastName,
   headline,
+  headlineStaticText,
+  headlineAnimatedWords,
+  headlineAnimationDuration,
   shortBio,
   email,
   phone,
@@ -43,9 +47,20 @@ export async function HeroSection() {
                 {profile.firstName}{" "}
                 <span className="text-primary">{profile.lastName}</span>
               </h1>
-              <p className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium">
-                {profile.headline}
-              </p>
+              {profile.headlineStaticText &&
+              profile.headlineAnimatedWords &&
+              profile.headlineAnimatedWords.length > 0 ? (
+                <LayoutTextFlip
+                  text={profile.headlineStaticText}
+                  words={profile.headlineAnimatedWords}
+                  duration={profile.headlineAnimationDuration || 3000}
+                  className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium"
+                />
+              ) : (
+                <p className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium">
+                  {profile.headline}
+                </p>
+              )}
               <p className="text-base @md/hero:text-lg text-muted-foreground leading-relaxed">
                 {profile.shortBio}
               </p>

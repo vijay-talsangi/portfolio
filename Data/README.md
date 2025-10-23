@@ -9,6 +9,7 @@ The following data files are available for import:
 | File | Description | Records |
 |------|-------------|---------|
 | `profile.ndjson` | Main profile information | 1 profile |
+| `profile-with-animation.ndjson` | Profile with animated headline feature | 1 profile |
 | `skills.ndjson` | Technical skills and proficiencies | 15 skills |
 | `experience.ndjson` | Work experience history | 4 positions |
 | `education.ndjson` | Educational background | 2 degrees |
@@ -164,6 +165,15 @@ Edit `profile.ndjson` and change:
 "firstName":"John" → "firstName":"YourName"
 "email":"john.doe@example.com" → "email":"your.email@example.com"
 ```
+
+### Animated Headline Feature
+
+The `profile-with-animation.ndjson` file includes the new animated headline feature:
+- **headlineStaticText**: "I build "
+- **headlineAnimatedWords**: ["innovative web apps", "scalable solutions", "beautiful interfaces", "AI-powered tools"]
+- **headlineAnimationDuration**: 3000ms
+
+This creates a dynamic text-flipping animation in your hero section. See `ANIMATED-HEADLINE-GUIDE.md` for full documentation.
 
 ### Example: Updating Site Settings
 

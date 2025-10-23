@@ -3838,6 +3838,30 @@
         },
         "optional": true
       },
+      "headlineStaticText": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "headlineAnimatedWords": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "headlineAnimationDuration": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "shortBio": {
         "type": "objectAttribute",
         "value": {
