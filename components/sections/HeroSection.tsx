@@ -3,6 +3,7 @@ import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -28,9 +29,12 @@ export async function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-6 py-20"
+      className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
-      <div className="container mx-auto max-w-6xl">
+      {/* Background Ripple Effect */}
+      <BackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+
+      <div className="relative z-10 container mx-auto max-w-6xl">
         <div className="@container">
           <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8 @lg:gap-12 items-center">
             {/* Text Content */}
