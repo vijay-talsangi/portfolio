@@ -1138,7 +1138,7 @@ export type ACHIEVEMENTS_QUERYResult = Array<{
 
 // Source: ./components/sections/BlogSection.tsx
 // Variable: BLOG_QUERY
-// Query: *[_type == "blog"] | order(publishedAt desc)[0...3]{  title,  slug,  excerpt,  category,  tags,  publishedAt,  readTime,  featuredImage}
+// Query: *[_type == "blog"] | order(publishedAt desc)[0...6]{  title,  slug,  excerpt,  category,  tags,  publishedAt,  readTime,  featuredImage}
 export type BLOG_QUERYResult = Array<{
   title: string | null;
   slug: Slug | null;
@@ -1535,7 +1535,7 @@ declare module "@sanity/client" {
     "*[_id == \"singleton-profile\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    firstName,\n    lastName,\n    headline,\n    shortBio,\n    email,\n    phone,\n    location,\n    availability,\n    socialLinks,\n    yearsOfExperience,\n    profileImage\n  }": CHAT_PROFILE_QUERYResult;
     "*[_id == \"singleton-profile\"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  stats,\n  email,\n  phone,\n  location\n}": ABOUT_QUERYResult;
     "*[_type == \"achievement\"] | order(date desc){\n  title,\n  type,\n  issuer,\n  date,\n  description,\n  image,\n  url,\n  featured,\n  order\n}": ACHIEVEMENTS_QUERYResult;
-    "*[_type == \"blog\"] | order(publishedAt desc)[0...3]{\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}": BLOG_QUERYResult;
+    "*[_type == \"blog\"] | order(publishedAt desc)[0...6]{\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}": BLOG_QUERYResult;
     "*[_type == \"certification\"] | order(issueDate desc){\n  name,\n  issuer,\n  issueDate,\n  expiryDate,\n  credentialId,\n  credentialUrl,\n  logo,\n  description,\n  skills[]->{name, category},\n  order\n}": CERTIFICATIONS_QUERYResult;
     "*[_id == \"singleton-profile\"][0]{\n  email,\n  phone,\n  location,\n  socialLinks\n}": PROFILE_QUERYResult;
     "*[_type == \"education\"] | order(endDate desc, startDate desc){\n  institution,\n  degree,\n  fieldOfStudy,\n  startDate,\n  endDate,\n  current,\n  gpa,\n  description,\n  achievements,\n  logo,\n  website,\n  order\n}": EDUCATION_QUERYResult;
