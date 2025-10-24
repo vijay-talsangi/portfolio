@@ -7,12 +7,12 @@ import { draftMode } from "next/headers";
 import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/DarkModeToggle";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { FloatingDock } from "@/components/FloatingDock";
 import SidebarToggle from "@/components/SidebarToggle";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ModeToggle } from "@/components/DarkModeToggle";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
