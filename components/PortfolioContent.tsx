@@ -13,7 +13,7 @@ import {
   TestimonialsSection,
 } from "@/components/sections";
 
-function PortfolioContent() {
+async function PortfolioContent() {
   return (
     <>
       <HeroSection />

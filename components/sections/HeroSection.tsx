@@ -5,6 +5,7 @@ import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
+import { ModeToggle } from "../DarkModeToggle";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -130,6 +131,8 @@ export async function HeroSection() {
                   </div>
                 )}
               </div>
+
+              <ModeToggle />
             </div>
 
             {/* Profile Image */}

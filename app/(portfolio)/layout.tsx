@@ -11,6 +11,7 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { FloatingDock } from "@/components/FloatingDock";
 import SidebarToggle from "@/components/SidebarToggle";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,29 +39,36 @@ export default async function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Script
-            src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
-            strategy="afterInteractive"
-          />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Script
+              src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+              strategy="afterInteractive"
+            />
 
-          <SidebarProvider defaultOpen={false}>
-            <SidebarInset className="">{children}</SidebarInset>
+            <SidebarProvider defaultOpen={false}>
+              <SidebarInset className="">{children}</SidebarInset>
 
-            <AppSidebar side="right" />
+              <AppSidebar side="right" />
 
-            <FloatingDock />
-            <SidebarToggle />
-          </SidebarProvider>
+              <FloatingDock />
+              <SidebarToggle />
+            </SidebarProvider>
 
-          {/* Live content API */}
-          <SanityLive />
+            {/* Live content API */}
+            <SanityLive />
 
-          {(await draftMode()).isEnabled && (
-            <>
-              <VisualEditing />
-              <DisableDraftMode />
-            </>
-          )}
+            {(await draftMode()).isEnabled && (
+              <>
+                <VisualEditing />
+                <DisableDraftMode />
+              </>
+            )}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
