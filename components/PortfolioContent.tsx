@@ -18,6 +18,7 @@ function PortfolioContent() {
     <>
       <HeroSection />
       <AboutSection />
+      <TestimonialsSection />
       <SkillsSection />
       <ExperienceSection />
       <EducationSection />
@@ -25,7 +26,6 @@ function PortfolioContent() {
       <CertificationsSection />
       <AchievementsSection />
       <ServicesSection />
-      <TestimonialsSection />
       <BlogSection />
       <ContactSection />
     </>

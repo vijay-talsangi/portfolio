@@ -84,6 +84,7 @@ export function SkillsChart({ skills }: SkillsChartProps) {
             {/* Chart */}
             <div className="p-4">
               <ChartContainer
+                id={`skills-chart-${category}`}
                 config={chartConfig}
                 className="w-full"
                 style={{ height: `${chartHeight}px` }}
