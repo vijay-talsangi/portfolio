@@ -97,7 +97,7 @@ export function Chat({
     },
   });
 
-  return <ChatKit control={control} className="h-full w-full" />;
+  return <ChatKit control={control} className="h-full w-full z-50" />;
 }
 
 export default Chat;
