@@ -1,5 +1,5 @@
-import { CometCard } from "@/components/ui/comet-card";
 import Image from "next/image";
+import { CometCard } from "@/components/ui/comet-card";
 
 export default function CometCardDemo() {
   return (
@@ -37,4 +37,3 @@ export default function CometCardDemo() {
     </CometCard>
   );
 }
-

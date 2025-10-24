@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
 
 type Service = {
   title: string | null;

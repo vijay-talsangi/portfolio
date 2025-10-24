@@ -26,14 +26,7 @@ export default defineType({
       title: "Tagline",
       type: "string",
       description: "Short one-liner about the project",
-      validation: (Rule) => Rule.max(100),
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "array",
-      of: [{ type: "block" }],
-      description: "Detailed project description",
+      validation: (Rule) => Rule.max(150),
     }),
     defineField({
       name: "coverImage",
@@ -47,51 +40,18 @@ export default defineType({
           name: "alt",
           type: "string",
           title: "Alternative Text",
+          description: "Describe the image for accessibility",
         },
       ],
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "gallery",
-      title: "Project Gallery",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: "alt",
-              type: "string",
-              title: "Alternative Text",
-            },
-            {
-              name: "caption",
-              type: "string",
-              title: "Caption",
-            },
-          ],
-        },
-      ],
     }),
     defineField({
       name: "technologies",
       title: "Technologies Used",
       type: "array",
       of: [{ type: "reference", to: [{ type: "skill" }] }],
-      description: "Select from your skills list",
-    }),
-    defineField({
-      name: "techStack",
-      title: "Tech Stack (Tags)",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Quick tags like 'React', 'Node.js', 'OpenAI API'",
-      options: {
-        layout: "tags",
-      },
+      description: "Select from your skills list (max 6 recommended)",
+      validation: (Rule) => Rule.max(8),
     }),
     defineField({
       name: "category",
@@ -112,6 +72,7 @@ export default defineType({
           { title: "Other", value: "other" },
         ],
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "liveUrl",
@@ -126,12 +87,6 @@ export default defineType({
       description: "Link to the GitHub repository",
     }),
     defineField({
-      name: "demoVideo",
-      title: "Demo Video URL",
-      type: "url",
-      description: "YouTube, Vimeo, or Loom link",
-    }),
-    defineField({
       name: "featured",
       title: "Featured Project",
       type: "boolean",
@@ -139,63 +94,12 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
-      name: "startDate",
-      title: "Start Date",
-      type: "date",
-    }),
-    defineField({
-      name: "endDate",
-      title: "End Date",
-      type: "date",
-      description: "Leave blank if ongoing",
-    }),
-    defineField({
-      name: "role",
-      title: "Your Role",
-      type: "string",
-      description: "E.g., 'Lead Developer', 'Solo Project', 'Team Member'",
-    }),
-    defineField({
-      name: "teamSize",
-      title: "Team Size",
-      type: "number",
-      description: "Number of people who worked on this",
-    }),
-    defineField({
-      name: "achievements",
-      title: "Key Achievements",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Bullet points of notable accomplishments",
-    }),
-    defineField({
-      name: "metrics",
-      title: "Impact Metrics",
-      type: "object",
-      fields: [
-        { name: "users", title: "Users/Downloads", type: "string" },
-        {
-          name: "performance",
-          title: "Performance Improvement",
-          type: "string",
-        },
-        { name: "revenue", title: "Revenue Impact", type: "string" },
-        { name: "other", title: "Other Metrics", type: "text" },
-      ],
-    }),
-    defineField({
-      name: "challenges",
-      title: "Technical Challenges",
-      type: "text",
-      rows: 4,
-      description: "What challenges did you overcome?",
-    }),
-    defineField({
       name: "order",
       title: "Display Order",
       type: "number",
-      description: "Lower numbers appear first",
+      description: "Lower numbers appear first (0-99)",
       initialValue: 0,
+      validation: (Rule) => Rule.min(0).max(99),
     }),
   ],
   preview: {
@@ -209,7 +113,7 @@ export default defineType({
       const { title, media, category, featured } = selection;
       return {
         title: featured ? `⭐ ${title}` : title,
-        subtitle: category,
+        subtitle: category || "Uncategorized",
         media: media,
       };
     },
@@ -221,9 +125,12 @@ export default defineType({
       by: [{ field: "order", direction: "asc" }],
     },
     {
-      title: "Newest First",
-      name: "dateDesc",
-      by: [{ field: "startDate", direction: "desc" }],
+      title: "Featured First",
+      name: "featuredFirst",
+      by: [
+        { field: "featured", direction: "desc" },
+        { field: "order", direction: "asc" },
+      ],
     },
   ],
 });

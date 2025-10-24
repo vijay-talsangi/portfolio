@@ -28,7 +28,8 @@ export default defineType({
       name: "headlineStaticText",
       title: "Headline Static Text",
       type: "string",
-      description: "The static part of your animated headline (e.g., 'I build')",
+      description:
+        "The static part of your animated headline (e.g., 'I build')",
       placeholder: "I build",
     }),
     defineField({
@@ -43,7 +44,8 @@ export default defineType({
       name: "headlineAnimationDuration",
       title: "Headline Animation Duration (ms)",
       type: "number",
-      description: "How long each word stays visible before flipping (default: 3000ms)",
+      description:
+        "How long each word stays visible before flipping (default: 3000ms)",
       initialValue: 3000,
       validation: (Rule) => Rule.min(1000).max(10000),
     }),
@@ -77,12 +79,6 @@ export default defineType({
           description: "Important for SEO and accessibility",
         },
       ],
-    }),
-    defineField({
-      name: "resumeUrl",
-      title: "Resume URL",
-      type: "url",
-      description: "Link to your resume/CV (Google Drive, Dropbox, etc.)",
     }),
     defineField({
       name: "email",
@@ -165,12 +161,6 @@ export default defineType({
           },
         },
       ],
-    }),
-    defineField({
-      name: "hourlyRate",
-      title: "Hourly Rate (USD)",
-      type: "number",
-      description: "Optional - for freelance work",
     }),
   ],
   preview: {

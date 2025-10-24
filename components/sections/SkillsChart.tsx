@@ -1,8 +1,8 @@
 "use client";
 
-import { Bar, BarChart, XAxis, YAxis, LabelList } from "recharts";
+import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,

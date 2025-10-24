@@ -10,10 +10,8 @@ const PROJECTS_QUERY =
   slug,
   tagline,
   category,
-  techStack,
   liveUrl,
   githubUrl,
-  featured,
   coverImage,
   technologies[]->{name, category, color}
 }`);

@@ -26,7 +26,7 @@ interface DockLink {
   onClick?: () => void;
 }
 
-const MAX_VISIBLE_ITEMS_DESKTOP = 5;
+const MAX_VISIBLE_ITEMS_DESKTOP = 6;
 const MAX_VISIBLE_ITEMS_MOBILE = 8;
 
 const getVisibleLinks = (links: DockLink[], maxItems: number) => {

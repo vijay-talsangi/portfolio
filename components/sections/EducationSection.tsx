@@ -1,4 +1,4 @@
-import { IconExternalLink, IconCalendar, IconAward } from "@tabler/icons-react";
+import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";

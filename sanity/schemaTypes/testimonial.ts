@@ -54,13 +54,6 @@ export default defineType({
       validation: (Rule) => Rule.min(1).max(5),
     }),
     defineField({
-      name: "project",
-      title: "Related Project",
-      type: "reference",
-      to: [{ type: "project" }],
-      description: "Which project is this testimonial about?",
-    }),
-    defineField({
       name: "date",
       title: "Date Received",
       type: "date",

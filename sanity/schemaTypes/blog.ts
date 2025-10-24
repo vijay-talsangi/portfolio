@@ -30,12 +30,6 @@ export default defineType({
       validation: (Rule) => Rule.max(200),
     }),
     defineField({
-      name: "content",
-      title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
-    }),
-    defineField({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
@@ -78,22 +72,10 @@ export default defineType({
       },
     }),
     defineField({
-      name: "author",
-      title: "Author",
-      type: "reference",
-      to: [{ type: "profile" }],
-    }),
-    defineField({
       name: "publishedAt",
       title: "Published Date",
       type: "datetime",
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "featured",
-      title: "Featured Post",
-      type: "boolean",
-      initialValue: false,
     }),
     defineField({
       name: "readTime",
@@ -101,52 +83,18 @@ export default defineType({
       type: "number",
       description: "Estimated reading time",
     }),
-    defineField({
-      name: "relatedPosts",
-      title: "Related Posts",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "blog" }] }],
-      validation: (Rule) => Rule.max(3),
-    }),
-    defineField({
-      name: "seo",
-      title: "SEO Settings",
-      type: "object",
-      fields: [
-        {
-          name: "metaTitle",
-          title: "Meta Title",
-          type: "string",
-          validation: (Rule) => Rule.max(60),
-        },
-        {
-          name: "metaDescription",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          validation: (Rule) => Rule.max(160),
-        },
-        {
-          name: "keywords",
-          title: "Keywords",
-          type: "array",
-          of: [{ type: "string" }],
-        },
-      ],
-    }),
   ],
   preview: {
     select: {
       title: "title",
       media: "featuredImage",
       category: "category",
-      featured: "featured",
     },
     prepare(selection) {
-      const { title, media, category, featured } = selection;
+      const { title, media, category } = selection;
       return {
-        title: featured ? `⭐ ${title}` : title,
-        subtitle: category,
+        title: title,
+        subtitle: category || "Uncategorized",
         media: media,
       };
     },
