@@ -45,6 +45,7 @@ Create an OpenAI account at [OpenAI](https://openai.com) to power your AI Twin
   - Contact form with validation
 - **Floating Navigation Dock**: Beautiful macOS-style dock for smooth section navigation
 - **Responsive Design**: Optimized for all devices from mobile to desktop
+- **Dark Mode Toggle** 🌓: Seamless theme switching with system preference detection (Light/Dark/System modes)
 - **Beautiful Animations**: Smooth transitions and micro-interactions using Framer Motion
 - **Real-Time Content**: Live content updates with Sanity's Live API
 
@@ -84,6 +85,7 @@ Create an OpenAI account at [OpenAI](https://openai.com) to power your AI Twin
 - **Turbopack** for lightning-fast development builds
 - **TypeScript** end-to-end with strict mode
 - **Tailwind CSS v4** for modern styling
+- **next-themes** for dark mode support with system preference detection
 - **Clerk** for secure authentication
 - **Sanity CMS** with real-time preview
 - **OpenAI ChatKit** for your AI Twin chat interface
@@ -395,6 +397,9 @@ _Join thousands of developers who've transformed their careers with PAPAFAM!_
 ### Portfolio Features
 - Add a resume/CV download feature
 - Implement a newsletter subscription with email integration
+- Extend dark mode with custom color themes (e.g., blue, purple, green variants)
+- Add automatic theme switching based on time of day
+- Create theme preview cards before applying
 - Add analytics dashboard to track portfolio visits and AI Twin conversations
 - Create a case study section with detailed project walkthroughs
 - Add video introductions to sections
