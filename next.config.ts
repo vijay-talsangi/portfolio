@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.sanity.io" },
       { protocol: "https", hostname: "unsplash.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "example.com" },
+      { protocol: "https", hostname: "mitwpu.edu.in" },
       { protocol: "https", hostname: "drive.google.com" },
       { protocol: "https", hostname: "via.placeholder.com" },
     ],

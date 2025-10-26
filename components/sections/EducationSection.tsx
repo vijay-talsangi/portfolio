@@ -5,18 +5,18 @@ import Link from "next/link";
 export async function EducationSection() {
   const education = [
     {
-      institution: "University of Example",
-      degree: "Bachelor of Science in Computer Science",
-      fieldOfStudy: "Computer Science",
-      startDate: "2015-09-01",
-      endDate: "2019-06-30",
-      current: false,
-      gpa: 3.8,
+      institution: "MITWPU (MIT World Peace University)",
+      degree: "Bachelor of Technology in Computer Science and Engineering",
+      fieldOfStudy: "Computer Science and Engineering",
+      startDate: "2023-07-01",
+      endDate: "2027-05-31",
+      current: true,
+      gpa: 8.3,
       description:
         "Studied various aspects of computer science including algorithms, data structures, and software engineering.",
-      achievements: ["Graduated with honors", "Dean's List for 4 semesters"],
-      logo: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
-      website: "https://www.universityofexample.com",
+      achievements: ["Scored full marks in Maths for 2 semesters", "Built projects for college"],
+      logo: "https://mitwpu.edu.in/uploads/notificationfile/logo.webp",
+      website: "https://mitwpu.edu.in/",
     },
   ];
 
