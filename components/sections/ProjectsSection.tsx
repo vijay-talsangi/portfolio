@@ -1,26 +1,73 @@
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const PROJECTS_QUERY =
-  defineQuery(`*[_type == "project" && featured == true] | order(order asc)[0...6]{
-  title,
-  slug,
-  tagline,
-  category,
-  liveUrl,
-  githubUrl,
-  coverImage,
-  technologies[]->{name, category, color}
-}`);
 
 export async function ProjectsSection() {
-  const { data: projects } = await sanityFetch({ query: PROJECTS_QUERY });
+  const projects = [
+    {
+      title: "Project One",
+      slug: "project-one",
+      tagline: "An amazing project",
+      category: "Web Development",
+      liveUrl: "https://example.com",
+      githubUrl: "https://github.com/example/project-one",
+      coverImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      technologies: [
+        { name: "Next.js", category: "framework", color: "var(--color-blue)" },
+        { name: "Tailwind CSS", category: "css", color: "var(--color-pink)" },
+      ],
+    },
+    {
+      title: "Project Two",
+      slug: "project-two",
+      tagline: "Another great project",
+      category: "UI/UX Design",
+      liveUrl: "https://example.com",
+      githubUrl: "https://github.com/example/project-two",
+      coverImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      technologies: [
+        { name: "Figma", category: "design", color: "var(--color-purple)" },
+        { name: "Adobe XD", category: "design", color: "var(--color-red)" },
+      ],
+    },
+  ];
 
   if (!projects || projects.length === 0) {
     return null;
+  }
+
+  function urlFor(coverImage: string) {
+    let _w: number | undefined;
+    let _h: number | undefined;
+
+    const builder = {
+      width(width: number) {
+        _w = width;
+        return builder;
+      },
+      height(height: number) {
+        _h = height;
+        return builder;
+      },
+      url() {
+        // If it's an external image, append query params for width/height (common CDN pattern)
+        if (/^(https?:)?\/\//.test(coverImage)) {
+          const params = new URLSearchParams();
+          if (_w) params.set("w", String(_w));
+          if (_h) params.set("h", String(_h));
+          const sep = coverImage.includes("?") ? "&" : "?";
+          return params.toString() ? coverImage + sep + params.toString() : coverImage;
+        }
+
+        // For local images (from /public), just return the path; Next/Image will handle sizing.
+        return coverImage;
+      },
+    };
+
+    return builder as {
+      width: (n: number) => any;
+      height: (n: number) => any;
+      url: () => string;
+    };
   }
 
   return (
@@ -37,7 +84,7 @@ export async function ProjectsSection() {
           <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-8">
             {projects.map((project) => (
               <div
-                key={project.slug?.current}
+                key={project.slug ?? project.title}
                 className="@container/card group bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 {/* Project Image */}
@@ -83,9 +130,9 @@ export async function ProjectsSection() {
                           tech && typeof tech === "object" && "name" in tech
                             ? tech
                             : null;
-                        return techData?.name ? (
+                          return techData?.name ? (
                           <span
-                            key={`${project.slug?.current}-tech-${idx}`}
+                            key={`${project.slug ?? project.title}-tech-${idx}`}
                             className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted"
                           >
                             {techData.name}

@@ -1,38 +1,60 @@
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
 
-const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  firstName,
-  lastName,
-  headline,
-  headlineStaticText,
-  headlineAnimatedWords,
-  headlineAnimationDuration,
-  shortBio,
-  email,
-  phone,
-  location,
-  availability,
-  socialLinks,
-  yearsOfExperience,
-  profileImage
-}`);
-
 export async function HeroSection() {
-  const { data: profile } = await sanityFetch({ query: HERO_QUERY });
+  const profile = {
+    firstName: "Vijay",
+    lastName: "Talsangi",
+    headline: "Web Developer",
+    headlineStaticText: "Web Developer",
+    headlineAnimatedWords: ["Designer", "Creator", "Innovator"],
+    headlineAnimationDuration: 3000,
+    shortBio: "Passionate about building web applications.",
+    email: "vijaytalsangi4705@gmail.com",
+    phone: "+917385408761",
+    location: "Pune, India",
+    availability: "Open to work",
+    socialLinks: {
+  github: "https://github.com/vijay-talsangi",
+  linkedin: "https://www.linkedin.com/in/vijay-talsangi",
+  twitter: "https://x.com/itisVJtalsangi",
+  website: "https://vijaytalsangi.com",
+    },
+    yearsOfExperience: 5,
+    profileImage: "/images/myphoto.jpg",
+  };
 
   if (!profile) {
     return null;
   }
 
+  function urlFor(profileImage: string) {
+    const params: Record<string, string> = {};
+
+    const builder = {
+      width(w: number) {
+        params.w = String(w);
+        return builder;
+      },
+      height(h: number) {
+        params.h = String(h);
+        return builder;
+      },
+      url() {
+        const qs = new URLSearchParams(params).toString();
+        if (!qs) return profileImage;
+        return `${profileImage}${profileImage.includes("?") ? "&" : "?"}${qs}`;
+      },
+    };
+
+    return builder;
+  }
+
   return (
     <section
-      id="home"
+      id="top"
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
       {/* Background Ripple Effect */}

@@ -1,18 +1,22 @@
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
 import WorldMapDemo from "@/components/world-map-demo";
-import { sanityFetch } from "@/sanity/lib/live";
 import { ContactForm } from "./ContactForm";
 
-const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  email,
-  phone,
-  location,
-  socialLinks
-}`);
-
 export async function ContactSection() {
-  const { data: profile } = await sanityFetch({ query: PROFILE_QUERY });
+  const profile = {
+    email: "example@example.com",
+    phone: "123-456-7890",
+    location: "New York, NY",
+    socialLinks: {
+      github: "https://github.com/vijay-talsangi",
+      linkedin: "https://www.linkedin.com/in/vijay-talsangi",
+      twitter: "https://x.com/itisVJtalsangi",
+      website: "https://www.example.com",
+      medium: "https://medium.com/@example",
+      devto: "https://dev.to/example",
+      youtube: "https://www.youtube.com/channel/example",
+    },
+  };
 
   if (!profile) {
     return null;

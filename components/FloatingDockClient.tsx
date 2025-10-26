@@ -1,8 +1,7 @@
 "use client";
 
-import { useClerk, useUser } from "@clerk/nextjs";
 import { IconLogout, IconMenu2, IconX } from "@tabler/icons-react";
-import Link from "next/link";
+// Use standard anchors and in-page scrolling instead of client-side routing
 import { useState } from "react";
 import { DynamicIcon } from "./DynamicIcon";
 import { useSidebar } from "./ui/sidebar";
@@ -39,8 +38,6 @@ const getVisibleLinks = (links: DockLink[], maxItems: number) => {
 };
 
 export function FloatingDockClient({ navItems }: FloatingDockClientProps) {
-  const { isSignedIn } = useUser();
-  const { signOut } = useClerk();
   const { open, isMobile, openMobile } = useSidebar();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMoreMenuOpen, setDesktopMoreMenuOpen] = useState(false);
@@ -55,15 +52,6 @@ export function FloatingDockClient({ navItems }: FloatingDockClientProps) {
       icon: <DynamicIcon iconName={item.icon || "IconHome"} />,
       isExternal: item.isExternal,
     })),
-    ...(isSignedIn && !isSidebarOpen
-      ? [
-          {
-            title: "Sign Out",
-            icon: <IconLogout className="h-full w-full" />,
-            onClick: () => signOut(),
-          },
-        ]
-      : []),
   ];
 
   const desktop = getVisibleLinks(links, MAX_VISIBLE_ITEMS_DESKTOP);
@@ -242,10 +230,36 @@ function DockIcon({
   };
 
   const handleClick = (e?: React.MouseEvent) => {
+    // If a custom onClick is provided, call it and prevent navigation.
     if (item.onClick) {
       e?.preventDefault();
       item.onClick();
+      onItemClick?.();
+      return;
     }
+
+    // If this is an external link, allow the default anchor behaviour.
+    if (item.isExternal) {
+      onItemClick?.();
+      return;
+    }
+
+    // For internal links, try to find an element on the same page and scroll to it.
+    // Map href like '/about' -> element with id 'about', '/' -> 'top'
+    const href = item.href || "#";
+    const path = href.split("?")[0];
+    const id = path === "/" || path === "#" ? "top" : path.replace(/^\//, "");
+
+    const el = typeof window !== "undefined" ? document.getElementById(id) : null;
+    if (el) {
+      e?.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      onItemClick?.();
+      return;
+    }
+
+    // No matching in-page element found — fall back to normal navigation.
+    // We allow the anchor to navigate naturally (do not preventDefault).
     onItemClick?.();
   };
 
@@ -269,20 +283,20 @@ function DockIcon({
   const wrapperClasses =
     "group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12";
 
+  // Use <a> for anchors so our click handler can decide whether to scroll in-page
   return item.onClick ? (
     <button type="button" onClick={handleClick} className={wrapperClasses}>
       {content}
     </button>
   ) : (
-    <Link
+    <a
       href={item.href || "#"}
       target={item.isExternal ? "_blank" : undefined}
       rel={item.isExternal ? "noopener noreferrer" : undefined}
       className={wrapperClasses}
-      scroll={!item.isExternal}
-      onClick={onItemClick}
+      onClick={handleClick}
     >
       {content}
-    </Link>
+    </a>
   );
 }

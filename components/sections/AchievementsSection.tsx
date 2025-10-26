@@ -1,27 +1,21 @@
 import { IconExternalLink, IconStar } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const ACHIEVEMENTS_QUERY =
-  defineQuery(`*[_type == "achievement"] | order(date desc){
-  title,
-  type,
-  issuer,
-  date,
-  description,
-  image,
-  url,
-  featured,
-  order
-}`);
 
 export async function AchievementsSection() {
-  const { data: achievements } = await sanityFetch({
-    query: ACHIEVEMENTS_QUERY,
-  });
+  const achievements = [
+    {
+      title: "Best Developer Award",
+      type: "award",
+      issuer: "Tech Company",
+      date: "2022-01-01",
+      description: "Awarded for outstanding performance in software development.",
+      image: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      url: "https://example.com/award",
+      featured: true,
+      order: 1,
+    },
+  ];
 
   if (!achievements || achievements.length === 0) {
     return null;
@@ -67,6 +61,54 @@ export async function AchievementsSection() {
   // Separate featured and regular achievements
   const featured = achievements.filter((a) => a.featured);
   const regular = achievements.filter((a) => !a.featured);
+
+  function urlFor(image: string) {
+    type UrlBuilder = {
+      width: (w: number) => UrlBuilder;
+      height: (h: number) => UrlBuilder;
+      url: () => string;
+    };
+
+    const isAbsolute = /^https?:\/\//i.test(image);
+    let w: number | undefined;
+    let h: number | undefined;
+
+    const builder: UrlBuilder = {
+      width(width: number) {
+        w = width;
+        return builder;
+      },
+      height(height: number) {
+        h = height;
+        return builder;
+      },
+      url() {
+        if (!image) return "";
+
+        // If it's an absolute URL, append query params for width/height
+        if (isAbsolute) {
+          try {
+            const u = new URL(image);
+            if (w) u.searchParams.set("w", String(w));
+            if (h) u.searchParams.set("h", String(h));
+            return u.toString();
+          } catch {
+            // fallback to raw string if URL parsing fails
+            return image;
+          }
+        }
+
+        // For relative paths (e.g. CMS asset ids), build a simple query-based URL.
+        // Adjust this branch if you use a specific image service (Sanity, Imgix, etc.)
+        const params: string[] = [];
+        if (w) params.push(`w=${w}`);
+        if (h) params.push(`h=${h}`);
+        return params.length ? `${image}${image.includes("?") ? "&" : "?"}${params.join("&")}` : image;
+      },
+    };
+
+    return builder;
+  }
 
   return (
     <section id="achievements" className="py-20 px-6 bg-muted/30">

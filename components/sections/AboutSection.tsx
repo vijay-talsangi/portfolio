@@ -1,22 +1,30 @@
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  firstName,
-  lastName,
-  fullBio,
-  yearsOfExperience,
-  stats,
-  email,
-  phone,
-  location
-}`);
 
 export async function AboutSection() {
-  const { data: profile } = await sanityFetch({ query: ABOUT_QUERY });
-
+  const profile: {
+    fullBio: { _type: string; children: { _type: string; text: string }[] }[];
+    stats?: { label: string; value: string }[];
+  } = {
+    fullBio: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Hello! I'm a passionate software developer with a love for creating dynamic and user-friendly applications."
+          }
+        ]
+      }
+    ],
+    stats: [
+      { label: "Projects", value: "20+" },
+      { label: "Years Experience", value: "5+" },
+      { label: "Clients", value: "10+" },
+      { label: "Awards", value: "3" }
+    ]
+  };
+  
   if (!profile) {
     return null;
   }

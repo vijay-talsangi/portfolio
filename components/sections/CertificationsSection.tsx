@@ -1,29 +1,26 @@
 import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
 import { CometCard } from "@/components/ui/comet-card";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const CERTIFICATIONS_QUERY =
-  defineQuery(`*[_type == "certification"] | order(issueDate desc){
-  name,
-  issuer,
-  issueDate,
-  expiryDate,
-  credentialId,
-  credentialUrl,
-  logo,
-  description,
-  skills[]->{name, category},
-  order
-}`);
 
 export async function CertificationsSection() {
-  const { data: certifications } = await sanityFetch({
-    query: CERTIFICATIONS_QUERY,
-  });
+  const certifications = [
+    {
+      name: "Certified Web Developer",
+      issuer: "Example University",
+      issueDate: "2022-01-01",
+      expiryDate: "2025-01-01",
+      credentialId: "123456",
+      credentialUrl: "https://www.example.com/certifications/123456",
+      logo: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      description: "Certification in web development.",
+      skills: [
+        { name: "JavaScript", category: "Programming Language" },
+        { name: "React", category: "Framework" },
+      ],
+      order: 1,
+    },
+  ];
 
   if (!certifications || certifications.length === 0) {
     return null;
@@ -41,6 +38,53 @@ export async function CertificationsSection() {
     if (!expiryDate) return false;
     return new Date(expiryDate) < new Date();
   };
+
+  function urlFor(logo: string) {
+    type Builder = {
+      width: (w: number) => Builder;
+      height: (h: number) => Builder;
+      url: () => string;
+    };
+
+    try {
+      const base = new URL(
+        logo,
+        typeof window !== "undefined" ? window.location.origin : "http://localhost"
+      );
+      const params = new URLSearchParams(base.search);
+
+      const builder: Builder = {
+        width(w: number) {
+          params.set("w", String(w));
+          return this;
+        },
+        height(h: number) {
+          params.set("h", String(h));
+          return this;
+        },
+        url() {
+          base.search = params.toString();
+          return base.toString();
+        },
+      };
+
+      return builder;
+    } catch {
+      // If the provided logo isn't a valid URL, return a no-op builder that yields the original string.
+      const noop: Builder = {
+        width() {
+          return this;
+        },
+        height() {
+          return this;
+        },
+        url() {
+          return logo;
+        },
+      };
+      return noop;
+    }
+  }
 
   return (
     <section

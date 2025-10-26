@@ -1,24 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const BLOG_QUERY = defineQuery(`*[_type == "blog"] | order(publishedAt desc){
-  title,
-  slug,
-  excerpt,
-  category,
-  tags,
-  publishedAt,
-  readTime,
-  featuredImage
-}`);
 
 export async function BlogSection() {
-  const { data: posts } = await sanityFetch({
-    query: BLOG_QUERY,
-  });
+  const posts = [
+    {
+      title: "Understanding React Hooks",
+      slug: "understanding-react-hooks",
+      excerpt: "A deep dive into React Hooks and how to use them effectively.",
+      category: "React",
+      tags: ["React", "Hooks", "JavaScript"],
+      publishedAt: "2022-01-01",
+      readTime: 5,
+      featuredImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+    },
+  ];
 
   if (!posts || posts.length === 0) {
     return null;
@@ -31,6 +26,47 @@ export async function BlogSection() {
       day: "numeric",
     });
   };
+
+  type ImageBuilder = {
+    width: (n: number) => ImageBuilder;
+    height: (n: number) => ImageBuilder;
+    url: () => string;
+  };
+
+  function urlFor(featuredImage: string): ImageBuilder {
+    const src = featuredImage || "";
+    const params: { w?: number; h?: number } = {};
+
+    const builder: ImageBuilder = {
+      width(w: number) {
+        params.w = w;
+        return builder;
+      },
+      height(h: number) {
+        params.h = h;
+        return builder;
+      },
+      url() {
+        // If it's a full URL, use the URL API to append query params
+        try {
+          const u = new URL(src);
+          if (params.w) u.searchParams.set("w", String(params.w));
+          if (params.h) u.searchParams.set("h", String(params.h));
+          return u.toString();
+        } catch {
+          // Not an absolute URL — treat as a path and append query params manually
+          const [base, existingQuery] = src.split("?");
+          const sp = new URLSearchParams(existingQuery || "");
+          if (params.w) sp.set("w", String(params.w));
+          if (params.h) sp.set("h", String(params.h));
+          const q = sp.toString();
+          return q ? `${base}?${q}` : base;
+        }
+      },
+    };
+
+    return builder;
+  }
 
   return (
     <section id="blog" className="py-20 px-6 bg-muted/30">
@@ -48,7 +84,7 @@ export async function BlogSection() {
           <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-8">
             {posts.map((post) => (
               <article
-                key={post.slug?.current}
+                key={post.slug}
                 className="@container/card group bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 {post.featuredImage && (
@@ -101,7 +137,7 @@ export async function BlogSection() {
                     <div className="flex flex-wrap gap-1.5 @md/card:gap-2">
                       {post.tags.slice(0, 3).map((tag: string) => (
                         <span
-                          key={`${post.slug?.current}-${tag}`}
+                          key={`${post.slug}-${tag}`}
                           className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted"
                         >
                           #{tag}
@@ -111,7 +147,7 @@ export async function BlogSection() {
                   )}
 
                   <Link
-                    href={`/blog/${post.slug?.current}`}
+                    href={`/blog/${post.slug}`}
                     className="inline-flex items-center text-primary hover:underline text-xs @md/card:text-sm font-medium"
                   >
                     Read More →

@@ -1,28 +1,26 @@
 import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const EDUCATION_QUERY =
-  defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){
-  institution,
-  degree,
-  fieldOfStudy,
-  startDate,
-  endDate,
-  current,
-  gpa,
-  description,
-  achievements,
-  logo,
-  website,
-  order
-}`);
 
 export async function EducationSection() {
-  const { data: education } = await sanityFetch({ query: EDUCATION_QUERY });
+  const education = [
+    {
+      institution: "University of Example",
+      degree: "Bachelor of Science in Computer Science",
+      fieldOfStudy: "Computer Science",
+      startDate: "2015-09-01",
+      endDate: "2019-06-30",
+      current: false,
+      gpa: 3.8,
+      description: "Studied various aspects of computer science including algorithms, data structures, and software engineering.",
+      achievements: [
+        "Graduated with honors",
+        "Dean's List for 4 semesters",
+      ],
+      logo: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      website: "https://www.universityofexample.com",
+    },
+  ];
 
   if (!education || education.length === 0) {
     return null;
@@ -34,6 +32,38 @@ export async function EducationSection() {
       month: "short",
     });
   };
+
+  function urlFor(logo: string) {
+    const src = logo || "";
+    let w: number | undefined;
+    let h: number | undefined;
+
+    const builder = {
+      width(width: number) {
+        w = width;
+        return builder;
+      },
+      height(height: number) {
+        h = height;
+        return builder;
+      },
+      url() {
+        // If no modifications requested return original source
+        if (!w && !h) return src;
+
+        // Build query string params
+        const params: string[] = [];
+        if (w) params.push(`w=${encodeURIComponent(String(w))}`);
+        if (h) params.push(`h=${encodeURIComponent(String(h))}`);
+
+        // Preserve existing query string if present
+        const separator = src.includes("?") ? "&" : "?";
+        return `${src}${separator}${params.join("&")}`;
+      },
+    };
+
+    return builder;
+  }
 
   return (
     <section

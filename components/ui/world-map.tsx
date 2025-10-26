@@ -4,7 +4,7 @@ import DottedMap from "dotted-map";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface MapProps {
   dots?: Array<{
@@ -23,9 +23,21 @@ export default function WorldMap({
 
   const { theme } = useTheme();
 
+  // Avoid hydration mismatch: theme from `next-themes` is not stable during
+  // SSR -> client mount. Only read `theme` after the component has mounted
+  // so server-rendered HTML matches the initial client HTML. After mount we
+  // can safely apply theme-dependent classes (no hydration warning).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && (theme === "dark" || theme === "system");
+
+  // Increase dot radius and opacity in dark mode for better visibility.
   const svgMap = map.getSVG({
-    radius: 0.22,
-    color: theme === "dark" ? "#FFFFFF40" : "#00000040",
+    // Use a conservative default for server render; the visible change for
+    // radius/color will be applied after mount when `isDark` becomes known.
+    radius: isDark ? 0.28 : 0.22,
+    color: isDark ? "#ffffffff" : "#00000040",
     shape: "circle",
     backgroundColor: "transparent",
   });
@@ -55,7 +67,9 @@ export default function WorldMap({
     <div className="w-full aspect-[2/1] rounded-lg relative font-sans">
       <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+        // Keep the server and initial client markup identical by not
+        // conditionally including `mix-blend-screen` until after mount.
+        className={`h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none ${mounted && isDark ? "mix-blend-screen" : ""}`}
         alt="world map showing global connectivity"
         height={495}
         width={1056}

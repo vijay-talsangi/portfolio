@@ -27,7 +27,7 @@ This document provides a detailed overview of all the dummy data available for y
 **Document ID:** `singleton-profile` (configured as singleton in structure.ts)
 
 **Content:**
-- **Name:** John Doe
+- **Name:** Vijay Talsangi
 - **Role:** Full-Stack Developer & AI Engineer
 - **Experience:** 8 years
 - **Location:** San Francisco, CA

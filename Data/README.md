@@ -179,7 +179,7 @@ This creates a dynamic text-flipping animation in your hero section. See `ANIMAT
 
 Edit `siteSettings.ndjson` and change:
 ```json
-"siteTitle":"John Doe - Developer" → "siteTitle":"Your Name - Developer"
+"siteTitle":"Vijay Talsangi - Developer" → "siteTitle":"Your Name - Developer"
 "primaryColor":"#3B82F6" → "primaryColor":"#YourColor"
 ```
 
