@@ -11,7 +11,8 @@ export async function BlogSection() {
       tags: ["React", "Hooks", "JavaScript"],
       publishedAt: "2022-01-01",
       readTime: 5,
-      featuredImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      featuredImage:
+        "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
     },
   ];
 

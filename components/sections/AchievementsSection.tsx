@@ -9,8 +9,10 @@ export async function AchievementsSection() {
       type: "award",
       issuer: "Tech Company",
       date: "2022-01-01",
-      description: "Awarded for outstanding performance in software development.",
-      image: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      description:
+        "Awarded for outstanding performance in software development.",
+      image:
+        "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
       url: "https://example.com/award",
       featured: true,
       order: 1,
@@ -103,7 +105,9 @@ export async function AchievementsSection() {
         const params: string[] = [];
         if (w) params.push(`w=${w}`);
         if (h) params.push(`h=${h}`);
-        return params.length ? `${image}${image.includes("?") ? "&" : "?"}${params.join("&")}` : image;
+        return params.length
+          ? `${image}${image.includes("?") ? "&" : "?"}${params.join("&")}`
+          : image;
       },
     };
 

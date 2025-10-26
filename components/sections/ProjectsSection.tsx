@@ -10,7 +10,8 @@ export async function ProjectsSection() {
       category: "Web Development",
       liveUrl: "https://example.com",
       githubUrl: "https://github.com/example/project-one",
-      coverImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      coverImage:
+        "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
       technologies: [
         { name: "Next.js", category: "framework", color: "var(--color-blue)" },
         { name: "Tailwind CSS", category: "css", color: "var(--color-pink)" },
@@ -23,7 +24,8 @@ export async function ProjectsSection() {
       category: "UI/UX Design",
       liveUrl: "https://example.com",
       githubUrl: "https://github.com/example/project-two",
-      coverImage: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
+      coverImage:
+        "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
       technologies: [
         { name: "Figma", category: "design", color: "var(--color-purple)" },
         { name: "Adobe XD", category: "design", color: "var(--color-red)" },
@@ -55,7 +57,9 @@ export async function ProjectsSection() {
           if (_w) params.set("w", String(_w));
           if (_h) params.set("h", String(_h));
           const sep = coverImage.includes("?") ? "&" : "?";
-          return params.toString() ? coverImage + sep + params.toString() : coverImage;
+          return params.toString()
+            ? coverImage + sep + params.toString()
+            : coverImage;
         }
 
         // For local images (from /public), just return the path; Next/Image will handle sizing.
@@ -63,11 +67,13 @@ export async function ProjectsSection() {
       },
     };
 
-    return builder as {
-      width: (n: number) => any;
-      height: (n: number) => any;
-      url: () => string;
+    type UrlBuilder = {
+      width(width: number): UrlBuilder;
+      height(height: number): UrlBuilder;
+      url(): string;
     };
+
+    return builder as UrlBuilder;
   }
 
   return (
@@ -130,7 +136,7 @@ export async function ProjectsSection() {
                           tech && typeof tech === "object" && "name" in tech
                             ? tech
                             : null;
-                          return techData?.name ? (
+                        return techData?.name ? (
                           <span
                             key={`${project.slug ?? project.title}-tech-${idx}`}
                             className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted"

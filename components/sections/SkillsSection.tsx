@@ -2,9 +2,22 @@ import { SkillsChart } from "./SkillsChart";
 
 export async function SkillsSection() {
   const skills = [
-    { name: "JavaScript", category: "programming-languages", proficiency: "Advanced", percentage: 90, yearsOfExperience: 5, color: "var(--color-yellow)" },
-    { name: "TypeScript", category: "programming-languages", proficiency: "Advanced", percentage: 85, yearsOfExperience: 4, color: "var(--color-blue)" },
-
+    {
+      name: "JavaScript",
+      category: "programming-languages",
+      proficiency: "Advanced",
+      percentage: 90,
+      yearsOfExperience: 5,
+      color: "var(--color-yellow)",
+    },
+    {
+      name: "TypeScript",
+      category: "programming-languages",
+      proficiency: "Advanced",
+      percentage: 85,
+      yearsOfExperience: 4,
+      color: "var(--color-blue)",
+    },
   ];
 
   return (

@@ -49,7 +49,9 @@ export async function CertificationsSection() {
     try {
       const base = new URL(
         logo,
-        typeof window !== "undefined" ? window.location.origin : "http://localhost"
+        typeof window !== "undefined"
+          ? window.location.origin
+          : "http://localhost",
       );
       const params = new URLSearchParams(base.search);
 

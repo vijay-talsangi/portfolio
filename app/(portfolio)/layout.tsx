@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { draftMode } from "next/headers";
-import Script from "next/script";
-import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/DarkModeToggle";
 import { FloatingDock } from "@/components/FloatingDock";
-import SidebarToggle from "@/components/SidebarToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
@@ -31,38 +27,30 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Script
-              src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
-              strategy="afterInteractive"
-            />
+          <SidebarProvider defaultOpen={false}>
+            <SidebarInset className="">{children}</SidebarInset>
 
-            <SidebarProvider defaultOpen={false}>
-              <SidebarInset className="">{children}</SidebarInset>
+            <FloatingDock />
 
-              <AppSidebar side="right" />
-
-              <FloatingDock />
-              <SidebarToggle />
-
-              {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
-              <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
-                <div className="w-10 h-10 md:w-12 md:h-12">
-                  <ModeToggle />
-                </div>
+            {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
+            <div className="fixed md:bottom-6 md:right-4 top-4 right-4 md:top-auto md:left-auto z-20">
+              <div className="w-10 h-10 md:w-12 md:h-12">
+                <ModeToggle />
               </div>
-            </SidebarProvider>
-          </ThemeProvider>
-        </body>
-      </html>
+            </div>
+          </SidebarProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

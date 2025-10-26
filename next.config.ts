@@ -12,10 +12,7 @@ const nextConfig: NextConfig = {
     ],
     // Allow local images under the `public/images` path (match query strings like ?w=600&h=600)
     // and also allow any other local path as a fallback.
-    localPatterns: [
-      { pathname: "/images/**" },
-      { pathname: "/:path*" },
-    ],
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/:path*" }],
     // Keep image optimization enabled; set `unoptimized: true` only if you
     // intentionally want to bypass Next's image optimization.
     unoptimized: false,

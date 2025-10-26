@@ -1,6 +1,6 @@
 "use client";
 
-import { IconLogout, IconMenu2, IconX } from "@tabler/icons-react";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 // Use standard anchors and in-page scrolling instead of client-side routing
 import { useState } from "react";
 import { DynamicIcon } from "./DynamicIcon";
@@ -250,7 +250,8 @@ function DockIcon({
     const path = href.split("?")[0];
     const id = path === "/" || path === "#" ? "top" : path.replace(/^\//, "");
 
-    const el = typeof window !== "undefined" ? document.getElementById(id) : null;
+    const el =
+      typeof window !== "undefined" ? document.getElementById(id) : null;
     if (el) {
       e?.preventDefault();
       el.scrollIntoView({ behavior: "smooth", block: "start" });

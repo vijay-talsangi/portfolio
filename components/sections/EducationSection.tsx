@@ -12,11 +12,9 @@ export async function EducationSection() {
       endDate: "2019-06-30",
       current: false,
       gpa: 3.8,
-      description: "Studied various aspects of computer science including algorithms, data structures, and software engineering.",
-      achievements: [
-        "Graduated with honors",
-        "Dean's List for 4 semesters",
-      ],
+      description:
+        "Studied various aspects of computer science including algorithms, data structures, and software engineering.",
+      achievements: ["Graduated with honors", "Dean's List for 4 semesters"],
       logo: "https://unsplash.com/photos/a-black-background-with-a-rainbow-in-the-middle-logNx9b2oEQ",
       website: "https://www.universityofexample.com",
     },

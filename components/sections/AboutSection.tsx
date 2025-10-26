@@ -12,19 +12,19 @@ export async function AboutSection() {
         children: [
           {
             _type: "span",
-            text: "Hello! I'm a passionate software developer with a love for creating dynamic and user-friendly applications."
-          }
-        ]
-      }
+            text: "Hello! I'm a passionate software developer with a love for creating dynamic and user-friendly applications.",
+          },
+        ],
+      },
     ],
     stats: [
       { label: "Projects", value: "20+" },
       { label: "Years Experience", value: "5+" },
       { label: "Clients", value: "10+" },
-      { label: "Awards", value: "3" }
-    ]
+      { label: "Awards", value: "3" },
+    ],
   };
-  
+
   if (!profile) {
     return null;
   }
